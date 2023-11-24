@@ -31,32 +31,6 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 });
-
-// Middleware function to make Axios GET request with API key
-// const axiosMiddleware = async (req, res, next) => {
-//   try {
-//     if (req.url === '/your/api/route') { // Modify this condition to match your specific route
-//       const apiKey = process.env.API_KEY; // Retrieve API key from environment variable
-
-//       const headers = {
-//         'Content-Type': 'application/json',
-//         'x-api-key': apiKey,
-//       };
-
-//       const response = await axios.get(`https://api.thecatapi.com/v1/images/search?format=json&limit=10`, { headers });
-//       req.apiResponse = response.data; // Store API response in the request object for further handling
-//     }
-//     next();
-//   } catch (error) {
-//     next(error);
-//   }
-// };
-
-//server.use(axiosMiddleware); // Apply the middleware to intercept specific routes
-
-
-
-// Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   const status = err.status || 500;
   const message = err.message || err;

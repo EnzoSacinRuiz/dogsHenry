@@ -1,28 +1,28 @@
 const {
     //createDriverDB,
-    getDriverById,
-    //getDriverByName,
+    getDogById,
+    getDogByName,
     getAllDrivers
     } = 
     require("../controllers/dogController")
 
-// const getDriversHandler = async (req,res)=>{
-//     const {name} = req.query;
+const getDogsHandlers = async (req,res)=>{
+    const {name} = req.query;
 
-//     try {
-//         if(name){
-//             const driverByName = await getDriverByName(name)
-//             res.status(200).json(driverByName)
-//         } else {
-//             const response = await getAllDrivers()
-//             res.status(200).json(response)
-//         }
+    try {
+        if(name){
+            const driverByName = await getDogByName(name)
+            res.status(200).json(driverByName)
+        } else {
+            const response = await getAllDrivers()
+            res.status(200).json(response)
+        }
         
-//     } catch (error) {
-//         res.status(400).json({error:error.message})        
-//     }
+    } catch (error) {
+        res.status(400).json({error:error.message})        
+    }
 
-// }
+}
 
 
 const getDetailHandler= async (req,res)=>{
@@ -31,14 +31,9 @@ const getDetailHandler= async (req,res)=>{
     const source = isNaN(id) ? "bdd":"api"
 
     try {
-        if(id)
-        {const response = await getDriverById(id,source)
-        res.status(200).json(response);}
-        else {
-        const response = await getAllDrivers()
-        res.status(200).json(response)
-                             }}
-    catch (error) {
+        const response = await getDogById(id,source)
+        res.status(200).json(response);
+    } catch (error) {
         res.status(400).json({error:error.message})
     }
 }
@@ -60,7 +55,7 @@ const getDetailHandler= async (req,res)=>{
 
 
 module.exports= {
-    //getDriversHandler, 
+    getDogsHandlers, 
     getDetailHandler, 
     // postDriversHandler
 }

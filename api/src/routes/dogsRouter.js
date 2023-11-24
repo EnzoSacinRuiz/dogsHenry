@@ -3,12 +3,14 @@ const { Router } = require("express");
 const dogsRouter = Router();
 
 const {
-    //getDogsHandlers,
+    getDogsHandlers,
     getDetailHandler,
     //postDogsHandler
 } = require ("../handlers/dogsHandlers")
 
-dogsRouter.get("/",getDetailHandler)
+dogsRouter.get("/",getDogsHandlers)
+dogsRouter.get("/:id",getDetailHandler)
+
 
 
 

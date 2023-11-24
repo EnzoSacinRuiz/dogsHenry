@@ -1,4 +1,0 @@
-    https://api.thedogapi.com/v1/images/search?limit=11&api_key=live_sMTz1SxLwuu6M31wRho1rLtZTXpYNabxBiY15Cb5qLqzk0FbHiWBA38Ilv4wve1r
-
-    api_key
-    live_sMTz1SxLwuu6M31wRho1rLtZTXpYNabxBiY15Cb5qLqzk0FbHiWBA38Ilv4wve1r 
