@@ -39,25 +39,34 @@ const getDetailHandler= async (req,res)=>{
 }
 
 
-// const postDriversHandler = async (req,res)=>{
-//     const {name , lastName , description , image , nationality , birthDate} = req.body
-//     //res.status(200).send(`Usuario ${name} creado con el user ${username} y tiene el teléfono ${phone}`)
-//     try {
-//         const response = await createDriverDB(name,lastName , description , image , nationality , birthDate)
-//         res.status(200).json(response)
-        
-//     } catch (error) {
-//         res.status(400).json({error:error.message})
-        
-//     }
-// }
+const postDogsHandler = async (req, res) => {
+    try {
+        const { name, height, weight, life_span, url } = req.body;
+
+        // Check if all required fields are present
+        if (!name || !height || !weight || !life_span || !url) {
+            return res.status(400).json({ error: "All fields are required." });
+        }
+
+        // Proceed with creating a dog entry using the received data
+        // Example: await createDog(name, height, weight, life_span, url);
+
+        // Send a success response upon successful creation
+        res.status(201).json({ message: "Dog created successfully." });
+    } catch (error) {
+        // Handle any errors that occur during dog creation
+        res.status(500).json({ error: error.message });
+    }
+};
+
+
 
 
 
 module.exports= {
     getDogsHandlers, 
     getDetailHandler, 
-    // postDriversHandler
+    postDogsHandler
 }
 
     

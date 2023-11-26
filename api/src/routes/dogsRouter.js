@@ -5,11 +5,12 @@ const dogsRouter = Router();
 const {
     getDogsHandlers,
     getDetailHandler,
-    //postDogsHandler
+    postDogsHandler
 } = require ("../handlers/dogsHandlers")
 
 dogsRouter.get("/",getDogsHandlers)
 dogsRouter.get("/:id",getDetailHandler)
+dogsRouter.post("/",postDogsHandler)
 
 
 

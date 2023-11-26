@@ -1,7 +1,7 @@
 const { Router } = require('express');
 
 const temperamentRouter = Router();
-const Temperament = require("../models/Temperament")
+const { Temperament } = require("../db")
 
 const {
     getTemperaments

@@ -3,13 +3,19 @@ const axios = require('axios');
 const dog = require("../models/Dog");
 const infoCleaner = require('../utils/index');
 //const Dog = require("../models/Dog");
-
 const path = require('path');
 require('dotenv').config({ path: path.resolve("C:\Users\Enzo Sacin Ruiz\OneDrive\Documentos\henry\fullStack\PI-Dogs-main\api\src\controllers", 'C:\Users\Enzo Sacin Ruiz\OneDrive\Documentos\henry\fullStack\PI-Dogs-main\api/.env') });
-// const createDriverDB = async ( name , lastName , description , image , nationality , birthDate) => {
-//     return await Driver.create({name , lastName , description , image , nationality , birthDate})
-//      ;
-// };
+
+const createDriverDB = async (name, height, weight, life_span, url) => {
+    return await Dog.create({ 
+            name: name,
+            height: height,
+            weight: weight,
+            life_span: life_span,
+            url: url,
+     });
+};
+
 
 const { API_KEY } = process.env; // Retrieve API key from environment variable
 
@@ -58,7 +64,7 @@ const getDogByName = async (name) => {
 
 
 module.exports={
-    //createDriverDB,
+    createDriverDB,
     getDogById,
     getDogByName,
     getAllDrivers}
