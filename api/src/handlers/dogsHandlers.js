@@ -1,5 +1,5 @@
 const {
-    //createDriverDB,
+    createDriverDB,
     getDogById,
     getDogByName,
     getAllDrivers
@@ -50,9 +50,11 @@ const postDogsHandler = async (req, res) => {
 
         // Proceed with creating a dog entry using the received data
         // Example: await createDog(name, height, weight, life_span, url);
+        await createDriverDB(name, height, weight, life_span, url)
 
         // Send a success response upon successful creation
         res.status(201).json({ message: "Dog created successfully." });
+
     } catch (error) {
         // Handle any errors that occur during dog creation
         res.status(500).json({ error: error.message });

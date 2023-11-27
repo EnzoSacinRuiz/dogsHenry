@@ -1,4 +1,6 @@
 const {Dog} = require("../db")
+const {Temperament}=require("../db")
+
 const axios = require('axios');
 const dog = require("../models/Dog");
 const infoCleaner = require('../utils/index');
@@ -14,6 +16,8 @@ const createDriverDB = async (name, height, weight, life_span, url) => {
             life_span: life_span,
             url: url,
      });
+
+     
 };
 
 
