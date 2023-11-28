@@ -20,7 +20,7 @@ const processSubfolders = (directoryPath) => {
             console.log('Processing subfolder:', subfolder);
 
             // Perform an operation inside each subfolder
-            const fileName = `${subfolder}.styles.css`;
+            const fileName = `${subfolder}.component.jsx`;
             const filePath = path.join(folderPath, fileName);
 
             fs.writeFile(filePath, '', (err) => {
@@ -35,6 +35,6 @@ const processSubfolders = (directoryPath) => {
 };
 
 // Specify the directory path you want to process
-const directoryPath = 'C:\\Users\\Enzo Sacin Ruiz\\OneDrive\\Documentos\\henry\\fullStack\\PI-Dogs-main\\client\\src\\views';
+const directoryPath = 'C:\\Users\\Enzo Sacin Ruiz\\OneDrive\\Documentos\\henry\\fullStack\\PI-Dogs-main\\client\\src\\components';
 
 processSubfolders(directoryPath);

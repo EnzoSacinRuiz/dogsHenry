@@ -1,21 +1,19 @@
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
+import Landing from './views/landing/landing.component';
 
-import Landing from './views/landing/landing.component'
-
-
+import {Route,BrowserRouter,Routes} from "react-router-dom"
 
 function App() {
   return (
     <BrowserRouter>
-        <Routes>
-          {/* <Route exact path="/home" element={<Home/>}/>
-          <Route path="/home/:id" element={<Detail/>}/>
-          <Route path="/create" element={<Create/>}/> */}
-          <Route path="/" element={<Landing/>}/>
-        </Routes> 
-     </BrowserRouter>
-    
+    <Routes>
+      {/* <Route exact path="/home" element={<Home/>}/>
+      <Route path="/home/:id" element={<Detail/>}/>
+      <Route path="/create" element={<Create/>}/> */}
+      <Route path="/" element={<Landing/>}/>
+    </Routes> 
+ </BrowserRouter>
   );
 }
 
