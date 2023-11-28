@@ -8,17 +8,34 @@ const infoCleaner = require('../utils/index');
 const path = require('path');
 require('dotenv').config({ path: path.resolve("C:\Users\Enzo Sacin Ruiz\OneDrive\Documentos\henry\fullStack\PI-Dogs-main\api\src\controllers", 'C:\Users\Enzo Sacin Ruiz\OneDrive\Documentos\henry\fullStack\PI-Dogs-main\api/.env') });
 
-const createDriverDB = async (name, height, weight, life_span, url) => {
-    return await Dog.create({ 
+const createDriverDB = async (name, height, weight, life_span, url, temperamentName) => {
+    try {
+        const createdDog = await Dog.create({ 
             name: name,
             height: height,
             weight: weight,
             life_span: life_span,
             url: url,
-     });
+        });
 
-     
+        const createdTemperament = await Temperament.create({
+            name: temperamentName
+        });
+
+        // Log the association methods available for Dog model
+        //console.log(Object.keys(Dog.prototype));
+
+        // Associate the created Dog with the created Temperament
+        await createdDog.addTemperament(createdTemperament);
+
+        return createdDog; // Returning the created Dog instance
+    } catch (error) {
+        // Handle error here
+        console.error('Error creating dog:', error);
+        throw error;
+    }
 };
+
 
 
 const { API_KEY } = process.env; // Retrieve API key from environment variable
