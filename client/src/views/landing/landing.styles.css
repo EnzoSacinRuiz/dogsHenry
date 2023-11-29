@@ -1,0 +1,36 @@
+/* styles.css */
+.buttonStyle {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  /* styles.css */
+
+/* Container for the entire landing content */
+.landing-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Set the container to full viewport height */
+    background-image: url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  /* Content within the landing container */
+  .content {
+    text-align: center;
+    color: #ffffff; /* Set text color */
+  }
+  
+  /* Additional styles for h1, h3, and button can go here if needed */
+  
+  
+  
+  

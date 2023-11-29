@@ -1,0 +1,9 @@
+.dog-card-list {
+    width: 85vw;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap; /* Allow cards to wrap to the next row */
+    justify-content: center; /* Center the cards horizontally */
+    gap: 20px; /* Adjust the gap between cards */
+  }
+  

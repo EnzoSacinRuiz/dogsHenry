@@ -1,0 +1,42 @@
+.dog-card-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #95dada;
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 25px;
+    cursor: pointer;
+    -moz-osx-font-smoothing: hidden;
+    transform: translateZ(0);
+    transition: transform 0.25s ease-out;
+    max-width: 300px; /* Limit the maximum width of the card */
+    margin: 10px; /* Add margin for spacing between cards */
+  }
+  
+  .dog-card-content {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .dog-card-image {
+    width: 100px; /* Set a fixed width for the image */
+    height: auto; /* Automatically adjust the height based on the width */
+    max-height: 150px; /* Limit the maximum height if needed */
+  }
+  
+  .dog-card-text {
+    margin-left: 10px; /* Add margin to the left of the text for spacing */
+  }
+  
+  .dog-card-container h2 {
+    margin: 0; /* Reset default margin for h2 elements */
+  }
+  
+  .dog-card-container p {
+    margin-top: 10px; /* Add margin at the top of the p element */
+  }
+  
+  .dog-card-container:hover {
+    transform: scale(1.05);
+  }
+  
