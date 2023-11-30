@@ -43,13 +43,10 @@ const postDogsHandler = async (req, res) => {
     try {
         const { name, height, weight, life_span, url, temperamentName } = req.body;
 
-        // Check if all required fields are present
         if (!name || !height || !weight || !life_span || !url || !temperamentName) {
             return res.status(400).json({ error: "All fields are required." });
         }
 
-        // Proceed with creating a dog entry using the received data
-        // Example: await createDog(name, height, weight, life_span, url);
         await createDriverDB(name, height, weight, life_span, url, temperamentName)
         
 

@@ -82,11 +82,16 @@ const getDogByName = async (name) => {
 
         const driverBDD = await Dog.findAll({ where: { name: name } });
 
-        return [...driversFiltered, ...driverBDD];
-    } catch (error) {
+        const combinedDrivers = [...driversFiltered, ...driverBDD];
+
+        if (combinedDrivers.length === 0) {
+          throw new Error('Dog not found');
+        }
+        return combinedDrivers;
+      } catch (error) {
         throw new Error(error.message);
+      }
     }
-}
 
 
 module.exports={

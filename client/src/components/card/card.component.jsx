@@ -4,7 +4,7 @@ import './card.styles.css';
 import { Link } from 'react-router-dom';
 
 function Card({ dog }) {
-  const { name, Temperaments, url, id, height, weight } = dog;
+  const { name, Temperaments, url, id, height, weight, created} = dog;
   console.log(Temperaments);
 
   const renderTemperament = () => {
@@ -29,7 +29,13 @@ function Card({ dog }) {
     <Link to={`/home/${id}`}>
       <div className="dog-card-container">
         <div className="dog-card-content">
-          {url && (
+        {created ? (
+            <img
+              src={url}
+              alt={`${name}`}
+              className="dog-card-image"
+            />
+          ) : (
             <img
               src={`https://cdn2.thedogapi.com/images/${url}.jpg`}
               alt={`${name}`}

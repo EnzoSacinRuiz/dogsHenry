@@ -56,11 +56,19 @@ function Detail() {
         <Link to="/home"> {/* Add Link to the home page */}
           <button className="go-back-button">Go Back</button>
         </Link>
-        <img
-          src={`https://cdn2.thedogapi.com/images/${user.url}.jpg`}
-          alt={user.name} 
-          className="user-image"
-        />
+        {user.created ? (
+            <img
+              src={user.url}
+              alt={`${user.name}`}
+              className="dog-card-image"
+            />
+          ) : (
+            <img
+              src={`https://cdn2.thedogapi.com/images/${user.url}.jpg`}
+              alt={`${user.name}`}
+              className="dog-card-image"
+            />
+          )}
         <h2 className="user-name">{`${user.name}`}</h2>
         <p className="user-info">ID: {user.id}</p>
         <p className="user-info">Height: {user.height}</p>

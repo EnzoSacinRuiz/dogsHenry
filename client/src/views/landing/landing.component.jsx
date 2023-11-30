@@ -10,9 +10,6 @@ import { createSelector } from 'reselect';
 
 
 function Landing() {
-
-
-    
   return (
     <div className="landing-container">
       <div className="content">
@@ -27,7 +24,6 @@ function Landing() {
     </div>
   );
 }
-
 
 export default Landing;
 
