@@ -32,18 +32,12 @@ import { all } from 'axios';
 //import './dogCards.styles.css';
 
 function Cards({ allUsers }) {
+  // If allUsers is not defined or is empty initially, display a message or return null
+  if (!allUsers || allUsers.length === 0) {
+    return <p>No dogs found</p>; // You can display a message or return null, as appropriate
+  }
 
-    const dogs=allUsers 
-    console.log(dogs);
-
-    // const dispatch = useDispatch();
-    // const dogs = useSelector((state) => state.allUsers); // Assuming dogs are stored in 'dogs' slice of your Redux state
-
-    // console.log(dogs);
-  
-    // useEffect(() => {
-    //   dispatch(getDogs());
-    // }, [dispatch]);
+  const dogs = allUsers;
 
   return (
     <div className="dog-card-list">
@@ -55,3 +49,4 @@ function Cards({ allUsers }) {
 }
 
 export default Cards;
+

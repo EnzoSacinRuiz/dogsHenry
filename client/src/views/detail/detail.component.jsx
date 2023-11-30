@@ -13,6 +13,23 @@ function Detail() {
   const { id } = useParams(); // Get the 'id' parameter from the URL
   //const [user, setUser] = useState(null);
 
+  const renderTemperament = (Temperaments) => {
+    if (Array.isArray(Temperaments)) {
+      if (Temperaments.length === 0) {
+        return 'No temperament information available';
+      } else if (typeof Temperaments[0] === 'string') {
+        // If Temperaments is an array of strings
+        return Temperaments.join(', ');
+      } else if (typeof Temperaments[0] === 'object' && 'name' in Temperaments[0]) {
+        // If Temperaments is an array of objects with 'name' property
+        const temperamentNames = Temperaments.map(temp => temp.name);
+        return temperamentNames.join(', ');
+      }
+    } else {
+      return 'Temperament data not available';
+    }
+  };
+
   const dispatch = useDispatch();
 
     useEffect(() => {
@@ -49,6 +66,9 @@ function Detail() {
         <p className="user-info">Height: {user.height}</p>
         <p className="user-info">Weight: {user.weight}</p>
         <p className="user-description">Life Span: {user.life_span}</p>
+        <p className="user-description">Temperamento: {renderTemperament(user.Temperaments)}</p>
+
+
       </div>
     </div>
   );
