@@ -2,8 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './landing.styles.css'; // Import your CSS file
 
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getDogs } from "../../redux/actions";
+
+import { createSelector } from 'reselect';
+
 
 function Landing() {
+
+
+    
   return (
     <div className="landing-container">
       <div className="content">
@@ -18,6 +27,7 @@ function Landing() {
     </div>
   );
 }
+
 
 export default Landing;
 

@@ -1,9 +1,11 @@
-// Using ES6 import syntax
+    // Using ES6 import syntax
 import axios from 'axios';
 
 
 // Define and export your action type as a variable
 export const GET_DOGS = "GET_DOGS";
+export const GET_BY_NAME="GET_BY_NAME"
+
 
 // Define your function and export it
 export const getDogs = function () {
@@ -20,3 +22,16 @@ export const getDogs = function () {
         }
     };
 };
+
+export function getByName(name) {
+    return async function (dispatch) {
+      // Capitalize the first letter of the name
+      const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
+  
+      const response = await axios(`http://localhost:3001/dogs?name=${capitalizedName}`);
+      return dispatch({
+        type: "GET_BY_NAME",
+        payload: response.data
+      });
+    };
+  }

@@ -1,5 +1,6 @@
 const {Dog} = require("../db")
 const {Temperament}=require("../db")
+const {DogTemperament}=require("../db")
 
 const axios = require('axios');
 const dog = require("../models/Dog");
@@ -43,7 +44,15 @@ const { API_KEY } = process.env; // Retrieve API key from environment variable
 
 const getAllDrivers = async() => {
     
-    const driverDB = await Dog.findAll()
+    const driverDB = await Dog.findAll({
+        include: [
+            {
+              model: Temperament,
+              attributes: ['name'], // Include only the 'name' attribute of Temperament
+              through: { model: DogTemperament, attributes: [] }, // Specify the intermediate table and exclude intermediate table attributes
+            },
+          ],
+    })
     
     const infoApi= (await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)).data
     const driverApi=infoCleaner(infoApi)

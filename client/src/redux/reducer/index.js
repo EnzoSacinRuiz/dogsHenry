@@ -1,4 +1,4 @@
-import { GET_DOGS } from "../actions";
+import { GET_DOGS,GET_BY_NAME } from "../actions";
 
 let initialState = {allUsers: [], usersCopy:[],temperaments:[] }
 
@@ -10,6 +10,11 @@ function rootReducer(state = initialState, action){
                 allUsers: action.payload,
                 usersCopy: action.payload
             }
+        case GET_BY_NAME:
+            return{
+                    ...state,
+                    allUsers: action.payload
+                };
         
             default:
                 return state

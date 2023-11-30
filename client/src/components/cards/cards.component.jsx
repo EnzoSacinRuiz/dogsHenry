@@ -34,6 +34,7 @@ import { all } from 'axios';
 function Cards({ allUsers }) {
 
     const dogs=allUsers 
+    console.log(dogs);
 
     // const dispatch = useDispatch();
     // const dogs = useSelector((state) => state.allUsers); // Assuming dogs are stored in 'dogs' slice of your Redux state
