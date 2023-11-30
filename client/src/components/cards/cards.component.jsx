@@ -1,5 +1,5 @@
 // import Card from "../card/card.component";
-// import "./cards.styles.css"
+import "./cards.styles.css"
 
 
 

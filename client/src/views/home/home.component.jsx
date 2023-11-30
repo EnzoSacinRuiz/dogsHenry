@@ -20,16 +20,19 @@
 
     console.log(allUsers);
 
-      return (
-        <div className="home">|
+    return (
+      <div className="home">
+        <div className="center-content">
           <h1 className="home-title">Este es el home!</h1>
-          <Navbar/>
-          <Cards allUsers={allUsers}/>
-
-
+          <Navbar />
         </div>
-        
-      );
+  
+        <div>
+          <Cards allUsers={allUsers} />
+        </div>
+      </div>
+    );
+      
     }
     
     export default Home;

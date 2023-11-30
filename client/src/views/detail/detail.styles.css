@@ -1,0 +1,34 @@
+/* detail.styles.css */
+.detail-title {
+    color: white;
+    font-size: 24px;
+}
+
+.user-image {
+    width: 300px;
+    height: auto;
+}
+
+.user-name,
+.user-info,
+.user-description {
+    color: black;
+}
+
+/* Style the "Go Back" button */
+.go-back-button {
+    position: absolute;
+    top: 20px; /* Adjust the top value to control the vertical position */
+    right: 20px; /* Adjust the right value to control the horizontal position */
+    background-color: white; /* Background color for the button */
+    color: black; /* Text color for the button */
+    padding: 10px 20px; /* Padding for the button */
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+/* Other styles */
+
+
+

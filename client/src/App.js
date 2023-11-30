@@ -14,7 +14,7 @@ import {Route,BrowserRouter,Routes} from "react-router-dom"
 
 function App() {
   return (
-    <PaletteProvider>
+   
     <BrowserRouter>
     <Routes>
       <Route exact path="/home" element={<Home/>}/>
@@ -23,7 +23,7 @@ function App() {
       <Route path="/" element={<Landing/>}/>
     </Routes> 
  </BrowserRouter>
- </PaletteProvider>
+  
   );
 }
 

@@ -26,7 +26,7 @@ function Card({ dog }) {
   
 
   return (
-    <Link to={`/dogs/${id}`}>
+    <Link to={`/home/${id}`}>
       <div className="dog-card-container">
         <div className="dog-card-content">
           {url && (

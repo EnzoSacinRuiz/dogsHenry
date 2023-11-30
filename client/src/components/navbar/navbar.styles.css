@@ -1,0 +1,28 @@
+/* navbar.styles.css */
+.custom-button {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 10px;
+  line-height: 1; /* Adjust line-height for button */
+  cursor: pointer;
+}
+
+.custom-button:hover {
+  background-color: darkgrey;
+}
+
+.search-box {
+  margin-bottom: 30px;
+}
+
+.search-box form {
+  gap: 10px; /* Add space between input and button */
+}
+
+.search-box input {
+  flex: 1; /* Allow input to grow and fill available space */
+  padding: 10px;
+  line-height: 1; /* Adjust line-height for input */
+  border: 1px solid #ccc; /* Add border to input */
+}
