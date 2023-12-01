@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { getByName } from "../../redux/actions";
+import { getByName, getDogs  } from "../../redux/actions";
 import './navbar.styles.css'; // Import your CSS file
 
-function Navbar() {
+function Navbar({ filteredUsers }) {
   const dispatch = useDispatch();
   const [searchString, setSearchString] = useState("");
 
@@ -17,6 +17,10 @@ function Navbar() {
     dispatch(getByName(searchString));
   }
 
+  function handleGetDogs() {
+    dispatch(getDogs());
+  }
+
   return (
     <div className="search-box">
       <form onSubmit={handleSubmit}>
@@ -26,6 +30,8 @@ function Navbar() {
           onChange={handleChange}
         />
         <button type="submit" className="custom-button">Buscar</button>
+        <button onClick={handleGetDogs}>Refrescar</button>
+
       </form>
     </div>
   );

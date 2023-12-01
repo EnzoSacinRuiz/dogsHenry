@@ -9,6 +9,7 @@ const Create = () => {
   const [maxWeight, setMaxWeight] = useState('');
   const [lifeSpan, setLifeSpan] = useState('');
   const [temperament, setTemperament] = useState('');
+  const [url, setURL] = useState('');
 
   const [errors, setErrors] = useState({
     name: '',
@@ -94,8 +95,8 @@ const Create = () => {
             name,
             height: `${parseInt(minHeight)} - ${parseInt(maxHeight)}`,
             weight: `${parseInt(minWeight)} - ${parseInt(maxWeight)}`,
-            life_span: parseInt(lifeSpan),
-            url: 'lolol',
+            life_span: parseInt(lifeSpan), //ACA
+            url: url,
             temperamentName: temperament,
           }),
         });
@@ -110,6 +111,7 @@ const Create = () => {
           setMaxWeight('');
           setLifeSpan('');
           setTemperament('');
+          setURL('');
         } else {
           try {
             const responseData = await response.json();
@@ -190,6 +192,13 @@ const Create = () => {
         placeholder="Life Span"
       />
       {errors.lifeSpan && <span className="error">{errors.lifeSpan}</span>}
+
+      <input
+        type="text"
+        value={url}
+        onChange={(e) => setURL(e.target.value)}
+        placeholder="URL"
+      />
 
       <input
         type="text"

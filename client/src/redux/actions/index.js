@@ -9,6 +9,11 @@ export const GET_BY_ID="GET_BY_ID"
 export const CLEAR_USER_DETAIL = 'CLEAR_USER_DETAIL'
 export const SORT_DOGS_ASCENDING = 'SORT_DOGS_ASCENDING';
 export const SORT_DOGS_DESCENDING = 'SORT_DOGS_DESCENDING';
+export const FILTER_CREATED_TRUE = 'FILTER_CREATED_TRUE';
+export const FILTER_CREATED_FALSE = 'FILTER_CREATED_FALSE';
+export const SORT_DOGS_ASCENDING_BY_WEIGHT = 'SORT_DOGS_ASCENDING_BY_WEIGHT';
+export const SORT_DOGS_DESCENDING_BY_WEIGHT ='SORT_DOGS_DESCENDING_BY_WEIGHT';
+
 
 
 // Define your function and export it
@@ -70,3 +75,26 @@ export function getByName(name) {
       };
     };
   
+    export const filterCreatedTrue = () => {
+      return {
+        type: FILTER_CREATED_TRUE
+      };
+    };
+    
+    export const filterCreatedFalse = () => {
+      return {
+        type: FILTER_CREATED_FALSE
+      };
+    };
+
+    export const sortDogsAscendingByWeight = () => {
+      return {
+        type: SORT_DOGS_ASCENDING_BY_WEIGHT,
+      };
+    };
+    
+    export const sortDogsDescendingByWeight = () => {
+      return {
+        type: SORT_DOGS_DESCENDING_BY_WEIGHT,
+      };
+    };
