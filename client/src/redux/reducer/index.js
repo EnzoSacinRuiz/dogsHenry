@@ -1,4 +1,5 @@
-import { GET_DOGS,GET_BY_NAME,GET_BY_ID } from "../actions";
+import { GET_DOGS,GET_BY_NAME,GET_BY_ID,CLEAR_USER_DETAIL,
+    SORT_DOGS_DESCENDING,SORT_DOGS_ASCENDING} from "../actions";
 
 let initialState = {allUsers: [], usersCopy:[],temperaments:[],detail:[] }
 
@@ -20,6 +21,21 @@ function rootReducer(state = initialState, action){
                     ...state,
                     detail: action.payload
                         };
+        case CLEAR_USER_DETAIL:
+                  return {
+                     ...state,
+                     detail: action.payload // Reset 'detail' to null or an initial value
+                        };
+        case SORT_DOGS_ASCENDING:
+                            return {
+                              ...state,
+                              allUsers: [...state.allUsers.slice().sort((a, b) => a.name.localeCompare(b.name))]
+                            };
+        case SORT_DOGS_DESCENDING:
+                            return {
+                              ...state,
+                              allUsers: [...state.allUsers.slice().sort((a, b) => b.name.localeCompare(a.name))]
+                            };
         
             default:
                 return state

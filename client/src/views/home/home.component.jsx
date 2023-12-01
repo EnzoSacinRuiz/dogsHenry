@@ -3,7 +3,7 @@
 
   import { useEffect, useState } from "react";
   import { useDispatch, useSelector } from "react-redux";
-  import { getDogs } from "../../redux/actions";
+  import { getDogs,sortDogsAscending,sortDogsDescending } from "../../redux/actions";
   // import { getAllUsers } from "../landing/landing.component";
   
 
@@ -16,9 +16,15 @@
   
 
      const allUsers = useSelector((state) => state.allUsers);
-
-
     console.log(allUsers);
+
+    const handleSortAscending = () => {
+      dispatch(sortDogsAscending());
+    };
+  
+    const handleSortDescending = () => {
+      dispatch(sortDogsDescending());
+    };
 
     return (
       <div className="home">
@@ -26,6 +32,11 @@
           <h1 className="home-title">Este es el home!</h1>
           <Navbar />
         </div>
+
+        <div>
+        <button onClick={handleSortAscending}>Sort Ascending</button>
+        <button onClick={handleSortDescending}>Sort Descending</button>
+      </div>
   
         <div>
           <Cards allUsers={allUsers} />

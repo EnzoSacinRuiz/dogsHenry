@@ -4,14 +4,14 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom'; // Import Link
-import { getById } from '../../redux/actions';
+import { getById,clearDetail } from '../../redux/actions';
 import './detail.styles.css';
 
 import { useDispatch, useSelector } from "react-redux";
 
 function Detail() {
   const { id } = useParams(); // Get the 'id' parameter from the URL
-  //const [user, setUser] = useState(null);
+  const dispatch = useDispatch();
 
   const renderTemperament = (Temperaments) => {
     if (Array.isArray(Temperaments)) {
@@ -30,10 +30,14 @@ function Detail() {
     }
   };
 
-  const dispatch = useDispatch();
+  
 
     useEffect(() => {
         dispatch(getById(id));
+
+        return () => {
+          dispatch(clearDetail()); // Dispatch action to clear the user detail in Redux store
+        };
       }, [dispatch]);
 
     const user = useSelector((state) => state.detail);

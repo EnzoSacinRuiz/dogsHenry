@@ -6,6 +6,9 @@ import axios from 'axios';
 export const GET_DOGS = "GET_DOGS";
 export const GET_BY_NAME="GET_BY_NAME"
 export const GET_BY_ID="GET_BY_ID"
+export const CLEAR_USER_DETAIL = 'CLEAR_USER_DETAIL'
+export const SORT_DOGS_ASCENDING = 'SORT_DOGS_ASCENDING';
+export const SORT_DOGS_DESCENDING = 'SORT_DOGS_DESCENDING';
 
 
 // Define your function and export it
@@ -44,5 +47,26 @@ export function getByName(name) {
         type: "GET_BY_ID",
         payload: response.data
       });
+    }};
+  export function clearDetail() {
+      return async function (dispatch) {
+        return dispatch({
+          type: "CLEAR_USER_DETAIL",
+          payload: null 
+        }) 
+      };
+      
     };
-  }
+  
+    export const sortDogsAscending = () => {
+      return {
+        type: SORT_DOGS_ASCENDING
+      };
+    };
+    
+    export const sortDogsDescending = () => {
+      return {
+        type: SORT_DOGS_DESCENDING
+      };
+    };
+  
