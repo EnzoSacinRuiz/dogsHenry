@@ -1,42 +1,30 @@
 .dog-card-container {
-    display: flex;
-    flex-direction: column;
-    background-color: #95dada;
-    border: 1px solid grey;
-    border-radius: 5px;
-    padding: 25px;
-    cursor: pointer;
-    -moz-osx-font-smoothing: hidden;
-    transform: translateZ(0);
-    transition: transform 0.25s ease-out;
-    max-width: 300px; /* Limit the maximum width of the card */
-    margin: 10px; /* Add margin for spacing between cards */
-  }
-  
-  .dog-card-content {
-    display: flex;
-    flex-direction: row;
-  }
-  
-  .dog-card-image {
-    width: 100px; /* Set a fixed width for the image */
-    height: auto; /* Automatically adjust the height based on the width */
-    max-height: 150px; /* Limit the maximum height if needed */
-  }
-  
-  .dog-card-text {
-    margin-left: 10px; /* Add margin to the left of the text for spacing */
-  }
-  
-  .dog-card-container h2 {
-    margin: 0; /* Reset default margin for h2 elements */
-  }
-  
-  .dog-card-container p {
-    margin-top: 10px; /* Add margin at the top of the p element */
-  }
-  
-  .dog-card-container:hover {
-    transform: scale(1.05);
-  }
-  
+  display: flex;
+  flex-direction: column;
+  background-color: #95dada;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 25px;
+  cursor: pointer;
+  -moz-osx-font-smoothing: hidden;
+  transform: translateZ(0);
+  transition: transform 0.25s ease-out;
+  width: 300px; /* Set a fixed width for the card */
+  height: 450px; /* Adjust height as per content */
+  margin: 10px; /* Add margin for spacing between cards */
+  text-align: center; /* Align content center */
+}
+
+.dog-card-image {
+  width: 100%; /* Occupy full width within the container */
+  height: auto; /* Automatically adjust height based on width */
+  max-height: 200px; /* Limit maximum height if needed */
+  border-radius: 5px; /* Optional: Add border-radius for image */
+  margin-bottom: 10px; /* Adjust space between image and text */
+}
+
+.dog-card-text {
+  margin-top: 10px; /* Add margin at the top of text */
+}
+
+/* Other styles as per your requirement */
