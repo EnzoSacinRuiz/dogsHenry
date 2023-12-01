@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/dogshenry/static/css/main.9c48d8ca.css",
+    "main.js": "/dogshenry/static/js/main.e4180059.js",
+    "static/js/787.d5fa4d18.chunk.js": "/dogshenry/static/js/787.d5fa4d18.chunk.js",
+    "index.html": "/dogshenry/index.html",
+    "main.9c48d8ca.css.map": "/dogshenry/static/css/main.9c48d8ca.css.map",
+    "main.e4180059.js.map": "/dogshenry/static/js/main.e4180059.js.map",
+    "787.d5fa4d18.chunk.js.map": "/dogshenry/static/js/787.d5fa4d18.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9c48d8ca.css",
+    "static/js/main.e4180059.js"
+  ]
+}
