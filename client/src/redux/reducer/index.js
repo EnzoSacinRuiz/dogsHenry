@@ -1,9 +1,9 @@
 import { GET_DOGS,GET_BY_NAME,GET_BY_ID,CLEAR_USER_DETAIL,
     SORT_DOGS_DESCENDING,SORT_DOGS_ASCENDING,FILTER_CREATED_TRUE,
     FILTER_CREATED_FALSE, SORT_DOGS_ASCENDING_BY_WEIGHT,
-    SORT_DOGS_DESCENDING_BY_WEIGHT} from "../actions";
+    SORT_DOGS_DESCENDING_BY_WEIGHT,GET_DOGS_BY_TEMPERAMENT,GET_TEMPERAMENTS } from "../actions";
 
-let initialState = {allUsers: [], usersCopy:[],temperaments:[],detail:[],byName:[] }
+let initialState = {allUsers: [], usersCopy:[],temperaments:[],detail:[],byName:[],dogsByTemperament: [],temperaments: [],}
 
 function rootReducer(state = initialState, action){
     switch (action.type){
@@ -81,6 +81,18 @@ function rootReducer(state = initialState, action){
                         return weightB - weightA;
                       })],
                     };
+
+        case GET_DOGS_BY_TEMPERAMENT:
+      return {
+        ...state,
+        dogsByTemperament: action.payload,
+      };
+
+      case GET_TEMPERAMENTS:
+      return {
+        ...state,
+        temperaments: action.payload,
+      };
         
         default:
                 return state

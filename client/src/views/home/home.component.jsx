@@ -4,7 +4,7 @@
   import { useEffect, useState } from "react";
   import { useDispatch, useSelector } from "react-redux";
   import { getDogs,sortDogsAscending,sortDogsDescending,filterCreatedTrue,
-    filterCreatedFalse,sortDogsAscendingByWeight,sortDogsDescendingByWeight} from "../../redux/actions";
+    filterCreatedFalse,sortDogsAscendingByWeight,sortDogsDescendingByWeight, getDogsByTemperament,getTemperaments} from "../../redux/actions";
   // import { getAllUsers } from "../landing/landing.component";
   
 
@@ -14,9 +14,32 @@
     const [currentPage, setCurrentPage] = useState(1); // Current page state
     const dogsPerPage = 8; // Number of dogs per page
 
+    const [selectedTemperament, setSelectedTemperament] = useState('');
+    const dogsByTemperament = useSelector((state) => state.dogsByTemperament);
+
+    const temperaments = useSelector((state) => state.temperaments);
+    
+    useEffect(() => {
+      dispatch(getTemperaments());
+    }, [dispatch]);
+
+
+
+
     useEffect(() => {
         dispatch(getDogs());
       }, [dispatch]);
+
+      const handleSelectChange = (event) => {
+        setSelectedTemperament(event.target.value);
+      };
+    
+      useEffect(() => {
+        if (selectedTemperament) {
+          dispatch(getDogsByTemperament(selectedTemperament));
+        }
+      }, [selectedTemperament, dispatch]);
+      console.log(dogsByTemperament);
       
   
 
@@ -77,6 +100,17 @@
         <button onClick={handleSortAscendingByWeight}>Sort by Weight Ascending</button>
         <button onClick={handleSortDescendingByWeight}>Sort by Weight Descending</button>
       </div>
+
+      <select value={selectedTemperament} onChange={handleSelectChange}>
+        <option value="">Select a temperament</option>
+        {temperaments.map((temperament) => (
+          <option key={temperament} value={temperament}>
+            {temperament}
+          </option>
+        ))}
+      </select>
+
+
   
         <div>
           <Cards allUsers={currentDogs} />

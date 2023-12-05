@@ -12,39 +12,60 @@ require('dotenv').config({ path: path.resolve("C:\Users\Enzo Sacin Ruiz\OneDrive
 
 const createDriverDB = async (name, height, weight, life_span, url, temperamentName) => {
     try {
-        const createdDog = await Dog.create({ 
-            name: name,
-            height: height,
-            weight: weight,
-            life_span: life_span,
-            url: url,
+      const createdDog = await Dog.create({ 
+        name: name,
+        height: height,
+        weight: weight,
+        life_span: life_span,
+        url: url,
+      });
+  
+      const capitalizeFirstLetter = (str) => {
+        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+      };
+  
+      if (typeof temperamentName === 'string') {
+        console.log("stringTemperament");
+        let singleTemperament = await Temperament.findOne({
+          where: {
+            name: capitalizeFirstLetter(temperamentName),
+          },
         });
-
-        
-        if(typeof temperamentName==='string'){
-            console.log("stringTemperament");
-            const singleTemperament = await Temperament.create({
-                name: temperamentName
-            });
-            await createdDog.addTemperament(singleTemperament)
+  
+        if (!singleTemperament) {
+          singleTemperament = await Temperament.create({
+            name: capitalizeFirstLetter(temperamentName),
+          });
         }
-
-        else {
-            console.log("arrayTemperament");
-            createdTemperament = await Promise.all(temperamentName.map(async (tempName) => {
-                return await Temperament.create({ name: tempName });
-              }));
-              await createdDog.setTemperaments(createdTemperament);
-        }
-        
-
-        return createdDog; 
+  
+        await createdDog.addTemperament(singleTemperament);
+      } else {
+        console.log("arrayTemperament");
+        const createdTemperaments = await Promise.all(temperamentName.map(async (tempName) => {
+          let formattedTempName = capitalizeFirstLetter(tempName);
+          let existingTemp = await Temperament.findOne({
+            where: {
+              name: formattedTempName,
+            },
+          });
+  
+          if (!existingTemp) {
+            existingTemp = await Temperament.create({ name: formattedTempName });
+          }
+          return existingTemp;
+        }));
+  
+        await createdDog.setTemperaments(createdTemperaments);
+      }
+  
+      return createdDog; 
     } catch (error) {
-        
-        console.error('Error creating dog:', error);
-        throw error;
+      console.error('Error creating dog:', error);
+      throw error;
     }
-};
+  };
+  
+  
 
 const { API_KEY } = process.env; // Retrieve API key from environment variable
 
@@ -100,6 +121,7 @@ const getDogByName = async (name) => {
       }
     }
 
+   
 
 module.exports={
     createDriverDB,

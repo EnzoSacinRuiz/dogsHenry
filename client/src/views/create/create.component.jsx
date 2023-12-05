@@ -86,6 +86,7 @@ const Create = () => {
       setAlertError(false); // Reset the alert error state if validation passes
       try {
         // Your code for handling form submission
+        const temperamentsArray = temperament.split(',').map(temp => temp.trim());
         const response = await fetch('http://localhost:3001/dogs', {
           method: 'POST',
           headers: {
@@ -97,7 +98,8 @@ const Create = () => {
             weight: `${parseInt(minWeight)} - ${parseInt(maxWeight)}`,
             life_span: parseInt(lifeSpan), //ACA
             url: url,
-            temperamentName: temperament,
+            // temperamentName: temperament,
+            temperamentName: temperamentsArray,
           }),
         });
 
@@ -117,7 +119,7 @@ const Create = () => {
             const responseData = await response.json();
             if (
               responseData.error &&
-              responseData.error.includes('llave duplicada viola restricción de unicidad «Dogs_name_key1»')
+              responseData.error.includes('llave duplicada viola restricción de unicidad')
             ) {
               alert('This name already exists. Please choose a different name.');
             } else {
@@ -137,10 +139,6 @@ const Create = () => {
     }
   };
 
-
-
-  // const errorList = Object.values(errors)
-  // console.log(errorList);
 
 
   return (

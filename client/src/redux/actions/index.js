@@ -13,6 +13,10 @@ export const FILTER_CREATED_TRUE = 'FILTER_CREATED_TRUE';
 export const FILTER_CREATED_FALSE = 'FILTER_CREATED_FALSE';
 export const SORT_DOGS_ASCENDING_BY_WEIGHT = 'SORT_DOGS_ASCENDING_BY_WEIGHT';
 export const SORT_DOGS_DESCENDING_BY_WEIGHT ='SORT_DOGS_DESCENDING_BY_WEIGHT';
+export const GET_DOGS_BY_TEMPERAMENT = 'GET_DOGS_BY_TEMPERAMENT';
+export const GET_TEMPERAMENTS = 'GET_TEMPERAMENTS';
+
+
 
 
 
@@ -97,4 +101,32 @@ export function getByName(name) {
       return {
         type: SORT_DOGS_DESCENDING_BY_WEIGHT,
       };
+    };
+
+    export const getDogsByTemperament = (temperamentId) => async (dispatch) => {
+      try {
+        const response = await axios.get(`http://localhost:3001/dogs?temperamentid=${temperamentId}`);
+        dispatch({
+          type: GET_DOGS_BY_TEMPERAMENT,
+          payload: response.data.filteredDogs,
+        });
+      } catch (error) {
+        console.error('Error fetching dogs by temperament:', error);
+      }
+    };
+
+
+  
+    export const getTemperaments = () => async (dispatch) => {
+      try {
+        const response = await axios.get('http://localhost:3001/temperaments');
+        const temperaments = response.data.map((temperament) => temperament.name);
+        
+        dispatch({
+          type: GET_TEMPERAMENTS,
+          payload: temperaments,
+        });
+      } catch (error) {
+        console.error('Error fetching temperaments:', error);
+      }
     };
