@@ -20,20 +20,27 @@ const createDriverDB = async (name, height, weight, life_span, url, temperamentN
             url: url,
         });
 
-        const createdTemperament = await Temperament.create({
-            name: temperamentName
-        });
+        
+        if(typeof temperamentName==='string'){
+            console.log("stringTemperament");
+            const singleTemperament = await Temperament.create({
+                name: temperamentName
+            });
+            await createdDog.addTemperament(singleTemperament)
+        }
 
-        // Log the association methods available for Dog model
-        //console.log(Object.keys(Dog.prototype));
+        else {
+            console.log("arrayTemperament");
+            createdTemperament = await Promise.all(temperamentName.map(async (tempName) => {
+                return await Temperament.create({ name: tempName });
+              }));
+              await createdDog.setTemperaments(createdTemperament);
+        }
+        
 
-        // Associate the created Dog with the created Temperament
-        await createdDog.addTemperament(createdTemperament);
-        //console.log(createdDog.ID);
-
-        return createdDog; // Returning the created Dog instance
+        return createdDog; 
     } catch (error) {
-        // Handle error here
+        
         console.error('Error creating dog:', error);
         throw error;
     }
