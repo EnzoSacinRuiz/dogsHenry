@@ -98,17 +98,17 @@ const getAllTemperaments = async () => {
 //     throw new Error(error.message);
 //   }
 // };
-const fetchTemperamentDetails = async (id) => {
+const fetchDogDetails = async (id) => {
     try {
       const response = await axios.get(`http://localhost:3001/dogs/${id}`);
       const dogDetails = response.data;
-      return dogDetails.Temperaments;
+      return dogDetails;
     } catch (error) {
       console.error('Error fetching dog details:', error);
-      return [];
+      return null;
     }
   };
-  
+
 const getDogbyTemperament = async (temperamentid) => {
     try {
       const temperament = await Temperament.findByPk(temperamentid, {
@@ -119,9 +119,25 @@ const getDogbyTemperament = async (temperamentid) => {
           },
         ],
       });
+      const cleanTemperament = [];
+
+    for (let i = 0; i < temperament.Dogs.length; i++) {
+      const dog = temperament.Dogs[i];
+      const dogDetails = await fetchDogDetails(dog.id);
+      if (dogDetails) {
+        const extractedTemperaments = dogDetails.Temperaments.map((temp) => temp.name);
+        const updatedDog = {
+          ...dog.toJSON(), // Convert Sequelize instance to plain object
+          Temperaments: `${extractedTemperaments.join(', ')}`,
+        };
+        cleanTemperament.push(updatedDog);
+      }
+    }
      
 
-      const cleanTemperament = infoCleaner2(temperament.Dogs)
+    const cleanTemperament2 = infoCleaner2(cleanTemperament)
+
+
   
       const response = (await axios.get('http://localhost:3001/dogs')).data;
       const filteredDogs = response.filter((dog) => {
@@ -129,7 +145,7 @@ const getDogbyTemperament = async (temperamentid) => {
       });
   
     
-    return {cleanTemperament,filteredDogs}
+    return [...cleanTemperament2,...filteredDogs]
   
     } catch (error) {
       throw new Error(error.message);

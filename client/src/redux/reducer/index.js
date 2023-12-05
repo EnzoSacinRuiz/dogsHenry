@@ -85,7 +85,7 @@ function rootReducer(state = initialState, action){
         case GET_DOGS_BY_TEMPERAMENT:
       return {
         ...state,
-        dogsByTemperament: action.payload,
+        allUsers: action.payload,
       };
 
       case GET_TEMPERAMENTS:

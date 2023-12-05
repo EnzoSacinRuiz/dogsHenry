@@ -105,10 +105,10 @@ export function getByName(name) {
 
     export const getDogsByTemperament = (temperamentId) => async (dispatch) => {
       try {
-        const response = await axios.get(`http://localhost:3001/dogs?temperamentid=${temperamentId}`);
+        const response = await axios.get(`http://localhost:3001/temperaments?temperamentid=${temperamentId}`);
         dispatch({
           type: GET_DOGS_BY_TEMPERAMENT,
-          payload: response.data.filteredDogs,
+          payload: response.data
         });
       } catch (error) {
         console.error('Error fetching dogs by temperament:', error);
