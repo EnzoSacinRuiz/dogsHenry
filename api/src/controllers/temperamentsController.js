@@ -98,7 +98,17 @@ const getAllTemperaments = async () => {
 //     throw new Error(error.message);
 //   }
 // };
-
+const fetchTemperamentDetails = async (id) => {
+    try {
+      const response = await axios.get(`http://localhost:3001/dogs/${id}`);
+      const dogDetails = response.data;
+      return dogDetails.Temperaments;
+    } catch (error) {
+      console.error('Error fetching dog details:', error);
+      return [];
+    }
+  };
+  
 const getDogbyTemperament = async (temperamentid) => {
     try {
       const temperament = await Temperament.findByPk(temperamentid, {
@@ -109,24 +119,18 @@ const getDogbyTemperament = async (temperamentid) => {
           },
         ],
       });
-      
+     
+
+      const cleanTemperament = infoCleaner2(temperament.Dogs)
   
       const response = (await axios.get('http://localhost:3001/dogs')).data;
       const filteredDogs = response.filter((dog) => {
         return dog.Temperaments && dog.Temperaments.includes(temperament.name);
       });
   
-      // Extract the name of the temperament from the fetched temperament
-      const { name } = temperament;
+    
+    return {cleanTemperament,filteredDogs}
   
-      // Create a new object with Temperaments property
-      const modifiedTemperament = {
-        ...temperament.dataValues,
-        Temperaments: name, // Assign the name of the temperament to Temperaments property
-      };
-      
-  
-      return { temperament: modifiedTemperament, filteredDogs };
     } catch (error) {
       throw new Error(error.message);
     }
