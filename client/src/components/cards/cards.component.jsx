@@ -31,13 +31,13 @@ import { all } from 'axios';
 
 //import './dogCards.styles.css';
 
-function Cards({ allUsers }) {
+function Cards({ currentDogs }) {
   // If allUsers is not defined or is empty initially, display a message or return null
-  if (!allUsers || allUsers.length === 0) {
+  if (!currentDogs || currentDogs.length === 0) {
     return <p>No dogs found</p>; // You can display a message or return null, as appropriate
   }
 
-  const dogs = allUsers;
+  const dogs = currentDogs;
 
   return (
     <div className="dog-card-list">

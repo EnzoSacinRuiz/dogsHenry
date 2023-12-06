@@ -13,12 +13,13 @@
   height: 450px; /* Adjust height as per content */
   margin: 10px; /* Add margin for spacing between cards */
   text-align: center; /* Align content center */
+  margin-top: 20px;
 }
 
 .dog-card-image {
   width: 100%; /* Occupy full width within the container */
-  height: auto; /* Automatically adjust height based on width */
-  max-height: 200px; /* Limit maximum height if needed */
+  height: 200px; /* Automatically adjust height based on width */
+  max-height: 150px; /* Limit maximum height if needed */
   border-radius: 5px; /* Optional: Add border-radius for image */
   margin-bottom: 10px; /* Adjust space between image and text */
 }

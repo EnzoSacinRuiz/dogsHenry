@@ -1,9 +1,10 @@
 import { GET_DOGS,GET_BY_NAME,GET_BY_ID,CLEAR_USER_DETAIL,
     SORT_DOGS_DESCENDING,SORT_DOGS_ASCENDING,FILTER_CREATED_TRUE,
     FILTER_CREATED_FALSE, SORT_DOGS_ASCENDING_BY_WEIGHT,
-    SORT_DOGS_DESCENDING_BY_WEIGHT,GET_DOGS_BY_TEMPERAMENT,GET_TEMPERAMENTS } from "../actions";
+    SORT_DOGS_DESCENDING_BY_WEIGHT,GET_DOGS_BY_TEMPERAMENT,GET_TEMPERAMENTS,
+    BREED_NOT_FOUND,FETCH_ERROR} from "../actions";
 
-let initialState = {allUsers: [], usersCopy:[],temperaments:[],detail:[],byName:[],dogsByTemperament: [],temperaments: [],}
+let initialState = {allUsers: [], usersCopy:[],temperaments:[],detail:[],byName:[],dogsByTemperament: [],temperaments: [],breedNotFound: false}
 
 function rootReducer(state = initialState, action){
     switch (action.type){
@@ -16,8 +17,15 @@ function rootReducer(state = initialState, action){
         case GET_BY_NAME:
             return{
                     ...state,
-                    allUsers: action.payload
+                    allUsers: action.payload,
+                    breedNotFound:false
                 };
+        case BREED_NOT_FOUND:
+      return {
+        ...state,
+        breedNotFound: action.payload, 
+        allUsers:[]
+      };
         case GET_BY_ID:
                  return{
                     ...state,
@@ -41,18 +49,17 @@ function rootReducer(state = initialState, action){
         case FILTER_CREATED_TRUE:
             return {
                  ...state,
-                 allUsers: state.usersCopy.filter(user => user.created === true)
+                 allUsers: state.allUsers.filter(user => user.created === true)
                 };
         case FILTER_CREATED_FALSE:
             return {
                     ...state,
-                    allUsers: state.usersCopy.filter(user => user.created === false)
+                    allUsers: state.allUsers.filter(user => user.created === false)
                 };
         case SORT_DOGS_ASCENDING_BY_WEIGHT:
                     return {
                       ...state,
                       allUsers: [...state.allUsers.slice().sort((a, b) => {
-                        // Extract and calculate average weight for comparison
                         const extractWeight = str => {
                           const [min, max] = str.split(' - ').map(Number);
                           return (min + max) / 2;

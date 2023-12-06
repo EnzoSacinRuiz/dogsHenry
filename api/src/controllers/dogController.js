@@ -82,6 +82,7 @@ const getAllDrivers = async() => {
           ],
     })
     
+    
     const infoApi= (await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)).data
     const driverApi=infoCleaner(infoApi)
 

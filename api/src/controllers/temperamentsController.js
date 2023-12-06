@@ -109,16 +109,19 @@ const fetchDogDetails = async (id) => {
     }
   };
 
-const getDogbyTemperament = async (temperamentid) => {
+const getDogbyTemperament = async (temperamentName) => {
+    const formattedTemperamentName =
+    temperamentName.charAt(0).toUpperCase() + temperamentName.slice(1).toLowerCase();
     try {
-      const temperament = await Temperament.findByPk(temperamentid, {
-        include: [
-          {
-            model: Dog,
-            attributes: ['id', 'name', 'height', 'weight', 'life_span', 'url'],
-          },
-        ],
-      });
+        const temperament = await Temperament.findOne({
+            where: { name: formattedTemperamentName },
+            include: [
+              {
+                model: Dog,
+                attributes: ['id', 'name', 'height', 'weight', 'life_span', 'url','created'],
+              },
+            ],
+          });
       const cleanTemperament = [];
 
     for (let i = 0; i < temperament.Dogs.length; i++) {

@@ -1,15 +1,20 @@
 /* navbar.styles.css */
+
 .custom-button {
-  background-color: black;
+  background-color: #0ccac4; /* Match button color with Home component */
   color: white;
   border: none;
-  padding: 10px;
-  line-height: 1; /* Adjust line-height for button */
+  padding: 10px 20px; /* Adjust padding for button */
+  line-height: 1;
   cursor: pointer;
+  border-radius: 5px; /* Add border-radius to button */
+  transition: background-color 0.3s ease;
+  font-size: 16px; /* Match font size with Home component */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect */
 }
 
 .custom-button:hover {
-  background-color: darkgrey;
+  background-color: #0faaa6; /* Match button hover color with Home component */
 }
 
 .search-box {
@@ -18,11 +23,27 @@
 
 .search-box form {
   gap: 10px; /* Add space between input and button */
+  display: flex; /* Align input and button horizontally */
+  align-items: center;
 }
 
 .search-box input {
-  flex: 1; /* Allow input to grow and fill available space */
+  flex: 1;
   padding: 10px;
-  line-height: 1; /* Adjust line-height for input */
-  border: 1px solid #ccc; /* Add border to input */
+  line-height: 1;
+  border: 1px solid #ccc;
+  border-radius: 5px; /* Add border-radius to input */
+  font-size: 16px; /* Match font size with Home component */
+  font-family: "Bigelow Rules"; /* Match font family with Home component */
+  color: #0ccac4; /* Match font color with Home component */
+}
+
+.search-box input:focus {
+  outline: none; /* Remove default focus outline */
+  border-color: #0ccac4; /* Match input border color with Home component */
+  box-shadow: 0px 0px 8px rgba(0, 204, 172, 0.5); /* Focus shadow effect */
+}
+
+.search-box button {
+  font-family: "Bigelow Rules"; /* Match font family with Home component */
 }

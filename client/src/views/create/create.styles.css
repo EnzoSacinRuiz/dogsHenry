@@ -22,3 +22,25 @@
     margin-top: 10px;
   }
 
+
+  /* create.styles.css */
+.go-back-link {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.go-back-button {
+  padding: 10px 20px;
+  background-color: #0ccac4;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.go-back-button:hover {
+  background-color: #0a8f8a;
+}

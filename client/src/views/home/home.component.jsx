@@ -4,9 +4,11 @@
   import { useEffect, useState } from "react";
   import { useDispatch, useSelector } from "react-redux";
   import { getDogs,sortDogsAscending,sortDogsDescending,filterCreatedTrue,
-    filterCreatedFalse,sortDogsAscendingByWeight,sortDogsDescendingByWeight, getDogsByTemperament,getTemperaments} from "../../redux/actions";
+    filterCreatedFalse,sortDogsAscendingByWeight,sortDogsDescendingByWeight, getDogsByTemperament,getTemperaments,filterByCreated, 
+  filterByTemperament} from "../../redux/actions";
   // import { getAllUsers } from "../landing/landing.component";
   
+  import './home.styles.css'
 
   function Home() {
 
@@ -15,9 +17,12 @@
     const dogsPerPage = 8; // Number of dogs per page
 
     const [selectedTemperament, setSelectedTemperament] = useState('');
-    const dogsByTemperament = useSelector((state) => state.dogsByTemperament);
-
     const temperaments = useSelector((state) => state.temperaments);
+    const dogsByTemperament = useSelector((state) => state.dogsByTemperament);
+    const breedNotFound = useSelector((state) => state.breedNotFound);
+
+
+    
     
     useEffect(() => {
       dispatch(getTemperaments());
@@ -39,7 +44,7 @@
           dispatch(getDogsByTemperament(selectedTemperament));
         }
       }, [selectedTemperament, dispatch]);
-      console.log(dogsByTemperament);
+      // console.log(dogsByTemperament);
       
   
 
@@ -49,6 +54,21 @@
      const indexOfLastDog = currentPage * dogsPerPage;
      const indexOfFirstDog = indexOfLastDog - dogsPerPage;
      const currentDogs = allUsers.slice(indexOfFirstDog, indexOfLastDog);
+
+     function handleGetDogs() {
+      dispatch(getDogs());
+    }
+
+     const handleFilterByCreated = (status) => {
+      dispatch(filterByCreated(status));
+    };
+  
+    const handleFilterByTemperament = (temperament) => {
+      dispatch(filterByTemperament(temperament));
+    };
+    const handleClearSelection = () => {
+      setSelectedTemperament(""); // Clear the selected temperament
+    };
 
 
     const handleSortAscending = () => {
@@ -79,26 +99,46 @@
       dispatch(sortDogsDescendingByWeight());
     };
 
+    const handleClearSelectionAndGetDogs = () => {
+      handleClearSelection();
+      handleGetDogs();
+    };
+  
+
+    
+
     return (
       <div className="home">
         <div className="center-content">
-          <h1 className="home-title">Este es el home!</h1>
+          <h1 className="home-title">HomePage</h1>
           <Navbar filteredUsers={filteredUsers} />
         </div>
 
-        <div>
-        <button onClick={handleSortAscending}>Sort Ascending</button>
-        <button onClick={handleSortDescending}>Sort Descending</button>
-      </div>
+        <div class="button-columns">
 
-      <div>
+        {/* <div class="button-column">
+          <button onClick={() => handleFilterByCreated(true)}>Filter Created True22</button>
+          <button onClick={() => handleFilterByCreated(false)}>Filter Created False22</button>
+        </div> */}
+
+        <div class="button-column">
+          <button onClick={handleSortAscending}>Sort Ascending</button>
+          <button onClick={handleSortDescending}>Sort Descending</button>
+        </div>
+
+      <div class="button-column">
         <button onClick={handleFilterCreatedTrue}>Filter Created True</button>
         <button onClick={handleFilterCreatedFalse}>Filter Created False</button>
       </div>
 
-      <div>
+      <div class="button-column">
         <button onClick={handleSortAscendingByWeight}>Sort by Weight Ascending</button>
         <button onClick={handleSortDescendingByWeight}>Sort by Weight Descending</button>
+      </div>
+
+      
+      <button onClick={handleClearSelectionAndGetDogs}>Refresh</button>
+
       </div>
 
       <select value={selectedTemperament} onChange={handleSelectChange}>
@@ -110,15 +150,18 @@
         ))}
       </select>
 
+      {/* <button onClick={handleClearSelectionAndGetDogs}>Clear Selection</button> */}
+
+
 
   
         <div>
-          <Cards allUsers={currentDogs} />
+          <Cards currentDogs={currentDogs} />
         </div>
 
-        <div>
+        <div className="pagination">
         {[...Array(Math.ceil(allUsers.length / dogsPerPage))].map((_, index) => (
-          <button key={index} onClick={() => paginate(index + 1)}>
+          <button key={index} className="pagination-button" onClick={() => paginate(index + 1)}>
             {index + 1}
           </button>
         ))}

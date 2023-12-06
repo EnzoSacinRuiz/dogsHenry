@@ -1,47 +1,108 @@
+/* Reset default browser styles */
 body {
-    margin: 0;
-    padding: 0;
-    font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen"
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans" ,"Helvetica";
-    
-     -webkit-font-smoothing: antialiased;
-     -moz-osx-font-smoothing: grayscale;
-     background: linear-gradient(
-        to left,
-        rgba(7, 27, 82, 1) 0%, 
-        rgba(0, 128, 128, 1) 100%
-        );
-    text-align: center;
-    }
-    .home-title{
-        margin-top: 75px;
-        margin-bottom: 50px;
-        font-size: 76px;
-        color: #0ccac4;
-        font-family: "Bigelow Rules";
-    }
-    .home{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .sort-buttons {
-        display: flex;
-        margin: 10px 0; /* Add margin to create space around the buttons */
-      }
-      
-      .sort-buttons button {
-        margin: 0 10px; /* Add margin to create space between buttons */
-      }
-    
-      .pagination {
-        display: flex;
-        margin: 10px 0; /* Add margin to create space around the buttons */
-      }
-      
-      .pagination button {
-        margin: 0 10px; /* Add margin to create space between buttons */
-      }
-      
-      
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(
+    to left,
+    rgba(7, 27, 82, 1) 0%, 
+    rgba(0, 128, 128, 1) 100%
+  );
+  text-align: center;
+}
+
+/* Title styles */
+.home-title {
+  margin-top: 75px;
+  margin-bottom: 50px;
+  font-size: 76px;
+  color: #0ccac4;
+  font-family: "Bigelow Rules";
+}
+
+/* Main container styles */
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Button columns */
+.button-columns {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.button-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}
+
+.button-column button {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #0ccac4;
+  color: white;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  min-width: 150px; /* Set a minimum width for buttons */
+  flex: 1; /* Distribute available space equally */
+}
+
+.button-column button:hover {
+  background-color: #0a8f8a;
+}
+select {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: white;
+  font-size: 16px;
+  cursor: pointer;
+  min-width: 200px; /* Adjust width as needed */
+}
+
+/* Option styles */
+option {
+  background-color: white;
+  color: #333;
+  font-size: 16px;
+}
+
+/* Hover effect for options */
+option:hover {
+  background-color: #f0f0f0;
+}
+
+/* Pagination styles */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination-button {
+  margin: 0 5px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #0ccac4;
+  color: white;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-button:hover {
+  background-color: #0a8f8a;
+}

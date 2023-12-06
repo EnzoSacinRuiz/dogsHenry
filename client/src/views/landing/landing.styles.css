@@ -1,35 +1,61 @@
-/* styles.css */
-.buttonStyle {
-    padding: 10px 20px;
-    background-color: #3498db;
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-  }
+/* Set background image for the whole viewport */
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-size: cover;
+  background-position: center;
+  text-align: center; /* Center-align text */
+  font-family: "Bigelow Rules"; /* Apply a specific font */
+  color: #fff; /* Set text color to white */
+}
 
-  /* styles.css */
-
-/* Container for the entire landing content */
 /* landing.styles.css */
 .landing-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh; /* Set the container to full viewport height */
-  background-image: url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-  background-size: cover;
-  background-position: center;
 }
- 
-  
-  
-  /* Content within the landing container */
- 
-  
-  
-  
-  
-  
+
+/* styles.css */
+.dog-image {
+  width: 300px;
+  height: 200px;
+  /* Add any other styles here as needed */
+}
+
+
+/* Content within the landing container */
+.content {
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent dark background */
+  border-radius: 10px; /* Rounded corners for content */
+}
+
+.content h1 {
+  font-size: 3rem; /* Larger font size */
+  margin-bottom: 20px; /* Add margin to separate from other elements */
+}
+
+.content h3 {
+  font-size: 1.5rem; /* Smaller font size */
+  margin-bottom: 30px; /* Add more space after the text */
+}
+
+/* Button style */
+.buttonStyle {
+  padding: 15px 30px; /* Adjust button padding */
+  background-color: #0ccac4;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+.buttonStyle:hover {
+  background-color: #0a8f8a; /* Darker background color on hover */
+}

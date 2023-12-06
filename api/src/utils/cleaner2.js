@@ -8,6 +8,7 @@ const infoCleaner2 = (arr) =>
         life_span: dog.life_span,
         url: dog.url,
         Temperaments:dog.Temperaments,
+        created:dog.created
                 
             }
         });

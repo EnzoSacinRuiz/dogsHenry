@@ -54,36 +54,27 @@ function Detail() {
   }
 
   return (
-    <div className="App">
-      <h1 className="detail-title">Detail</h1>
-      <div className="user-details">
-        <Link to="/home"> {/* Add Link to the home page */}
-          <button className="go-back-button">Go Back</button>
-        </Link>
-        {user.created ? (
-            <img
-              src={user.url}
-              alt={`${user.name}`}
-              className="dog-card-image"
-            />
-          ) : (
-            <img
-              src={`https://cdn2.thedogapi.com/images/${user.url}.jpg`}
-              alt={`${user.name}`}
-              className="dog-card-image"
-            />
-          )}
-        <h2 className="user-name">{`${user.name}`}</h2>
-        <p className="user-info">ID: {user.id}</p>
-        <p className="user-info">Height: {user.height}</p>
-        <p className="user-info">Weight: {user.weight}</p>
-        <p className="user-description">Life Span: {user.life_span}</p>
-        <p className="user-description">Temperamento: {renderTemperament(user.Temperaments)}</p>
-
-
+    <div className="detail-container">
+    <h1 className="detail-title">Detail</h1>
+    <div className="user-details">
+      <Link to="/home" className="go-back-link">
+        <button className="go-back-button">Go Back</button>
+      </Link>
+      <div className="user-image">
+        <img src={user.created ? user.url : `https://cdn2.thedogapi.com/images/${user.url}.jpg`} alt={user.name} />
+      </div>
+      <h2 className="user-name">{user.name}</h2>
+      <p className="user-info">ID: {user.id}</p>
+      <p className="user-info">Height: {user.height}</p>
+      <p className="user-info">Weight: {user.weight}</p>
+      <p className="user-description">Life Span: {user.life_span}</p>
+      <div className="user-temperaments">
+        <p className="user-description">Temperamento: </p>
+        {renderTemperament(user.Temperaments)}
       </div>
     </div>
-  );
+  </div>
+);
 }
 
 export default Detail;

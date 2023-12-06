@@ -15,6 +15,8 @@ export const SORT_DOGS_ASCENDING_BY_WEIGHT = 'SORT_DOGS_ASCENDING_BY_WEIGHT';
 export const SORT_DOGS_DESCENDING_BY_WEIGHT ='SORT_DOGS_DESCENDING_BY_WEIGHT';
 export const GET_DOGS_BY_TEMPERAMENT = 'GET_DOGS_BY_TEMPERAMENT';
 export const GET_TEMPERAMENTS = 'GET_TEMPERAMENTS';
+export const BREED_NOT_FOUND='BREED_NOT_FOUND';
+export const FETCH_ERROR='FETCH_ERROR';
 
 
 
@@ -37,17 +39,34 @@ export const getDogs = function () {
 };
 
 export function getByName(name) {
-    return async function (dispatch) {
-      // Capitalize the first letter of the name
+  return async function (dispatch) {
+    try {
       const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
-  
-      const response = await axios(`http://localhost:3001/dogs?name=${capitalizedName}`);
-      return dispatch({
+      const response = await axios.get(`http://localhost:3001/dogs?name=${capitalizedName}`);
+
+      dispatch({
         type: "GET_BY_NAME",
         payload: response.data
       });
-    };
-  }
+    } catch (error) {
+      // Handle the error here
+      if (error.response && error.response.status === 400) {
+        // Dog not found, you can dispatch an action to handle this case
+        dispatch({
+          type: "BREED_NOT_FOUND",
+          payload: true  // You can set payload to null or an empty object/array
+        });
+      } else {
+        // Handle other types of errors, e.g., network issues, server errors, etc.
+        dispatch({
+          type: "FETCH_ERROR",
+          payload: null  // Set payload as appropriate based on your error handling strategy
+        });
+      }
+    }
+  };
+}
+
 
   export function getById(id) {
     return async function (dispatch) {  
@@ -130,3 +149,17 @@ export function getByName(name) {
         console.error('Error fetching temperaments:', error);
       }
     };
+
+    //NO APLICA
+    export const filterByCreated = (status) => {
+      return {
+        type: status ? FILTER_CREATED_TRUE : FILTER_CREATED_FALSE,
+      };
+    };
+
+    export const filterByTemperament = (temperament) => {
+  return {
+    type: GET_DOGS_BY_TEMPERAMENT,
+    payload: temperament,
+  };
+};

@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import "./create.styles.css"
+import { Link } from 'react-router-dom';
 
 const Create = () => {
   const [name, setName] = useState('');
@@ -142,7 +143,14 @@ const Create = () => {
 
 
   return (
-    <form className="form-container" onSubmit={handleSubmit}>
+
+
+    <div> 
+      <h1>Crea tu perro</h1>
+      <Link to="/home" className="go-back-link">
+        <button className="go-back-button">Go Back</button>
+      </Link>
+<form className="form-container" onSubmit={handleSubmit}>
       <input
         type="text"
         value={name}
@@ -219,6 +227,8 @@ const Create = () => {
    
 
     </form>
+    </div>
+    
   );
 };
 

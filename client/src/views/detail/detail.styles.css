@@ -1,34 +1,86 @@
 /* detail.styles.css */
-.detail-title {
-    color: white;
-    font-size: 24px;
-}
 
-.user-image {
+/* Container styles */
+.detail-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #333; /* Change text color to a darker shade */
+  }
+  
+  /* Title styles */
+  .detail-title {
+    font-size: 24px;
+    color: white; /* Adjust title color */
+  }
+  
+  /* User details container */
+  .user-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  /* User image styles */
+  .user-image img {
     width: 300px;
     height: auto;
-}
-
-.user-name,
-.user-info,
-.user-description {
-    color: black;
-}
-
-/* Style the "Go Back" button */
-.go-back-button {
-    position: absolute;
-    top: 20px; /* Adjust the top value to control the vertical position */
-    right: 20px; /* Adjust the right value to control the horizontal position */
-    background-color: white; /* Background color for the button */
-    color: black; /* Text color for the button */
-    padding: 10px 20px; /* Padding for the button */
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  /* User name styles */
+  .user-name {
+    font-size: 20px;
+    margin: 0;
+    color: #333; /* Adjust text color */
+  }
+  
+  /* User info and description styles */
+  .user-info,
+  .user-description {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #333; /* Adjust text color */
+  }
+  
+  /* Go back button styles */
+  .go-back-link {
+    margin-bottom: 20px;
+  }
+  
+  .go-back-button {
+    background-color: #0ccac4;
+    color: white;
+    padding: 10px 20px;
     border: none;
     cursor: pointer;
     border-radius: 4px;
-}
-
-/* Other styles */
-
-
-
+    transition: background-color 0.3s ease;
+  }
+  
+  .go-back-button:hover {
+    background-color: #0ab9a9;
+  }
+  
+  /* Temperament styles */
+  .user-temperaments {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .user-temperament {
+    background-color: #0ccac4;
+    color: white;
+    padding: 5px 10px;
+    margin: 3px;
+    border-radius: 4px;
+  }
+  

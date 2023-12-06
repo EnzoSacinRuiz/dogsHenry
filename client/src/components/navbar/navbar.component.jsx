@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { getByName, getDogs  } from "../../redux/actions";
 import './navbar.styles.css'; // Import your CSS file
 
 function Navbar({ filteredUsers }) {
   const dispatch = useDispatch();
   const [searchString, setSearchString] = useState("");
+  const breedNotFound = useSelector((state) => state.breedNotFound);
 
   function handleChange(e) {
     setSearchString(e.target.value);
@@ -17,22 +18,25 @@ function Navbar({ filteredUsers }) {
     dispatch(getByName(searchString));
   }
 
-  function handleGetDogs() {
-    dispatch(getDogs());
-  }
+  // function handleGetDogs() {
+  //   dispatch(getDogs());
+  // }
 
   return (
     <div className="search-box">
       <form onSubmit={handleSubmit}>
         <input
           type="search"
-          placeholder="Ingresa el nombre"
+          placeholder="Ingresa la raza"
           onChange={handleChange}
         />
         <button type="submit" className="custom-button">Buscar</button>
-        <button onClick={handleGetDogs}>Refrescar</button>
-
       </form>
+      {breedNotFound && (
+        <div className="alert alert-danger" role="alert">
+          Breed not found. Please try a different breed.
+        </div>
+      )}
     </div>
   );
 }
