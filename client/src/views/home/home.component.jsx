@@ -19,7 +19,7 @@ function Home() {
   const dogsPerPage = 8;
 
   const [selectedTemperament, setSelectedTemperament] = useState('');
-    
+
 
 
   const temperaments = useSelector((state) => state.temperaments);
@@ -176,7 +176,7 @@ function Home() {
 
         <span>Page {currentPage} of {totalNumberOfPages}</span>
 
-        
+
 
         <button
           className="pagination-button"

@@ -1,16 +1,14 @@
-
-
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; // Import Link
+import { Link } from 'react-router-dom'; 
 import { getById,clearDetail } from '../../redux/actions';
 import './detail.styles.css';
 
 import { useDispatch, useSelector } from "react-redux";
 
 function Detail() {
-  const { id } = useParams(); // Get the 'id' parameter from the URL
+  const { id } = useParams(); 
   const dispatch = useDispatch();
 
   const renderTemperament = (Temperaments) => {
@@ -36,7 +34,7 @@ function Detail() {
         dispatch(getById(id));
 
         return () => {
-          dispatch(clearDetail()); // Dispatch action to clear the user detail in Redux store
+          dispatch(clearDetail()); 
         };
       }, [dispatch]);
 

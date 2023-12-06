@@ -6,8 +6,8 @@ const {
   getAllTemperaments,
   getDogbyTemperament
 
-}=
-require("../controllers/temperamentsController")
+} =
+  require("../controllers/temperamentsController")
 
 
 const getTemperaments = async (req, res) => {
@@ -26,6 +26,7 @@ const getTemperaments = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
 
 module.exports = { getTemperaments };
 

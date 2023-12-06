@@ -6,14 +6,11 @@ const {
     getDogsHandlers,
     getDetailHandler,
     postDogsHandler
-} = require ("../handlers/dogsHandlers")
+} = require("../handlers/dogsHandlers")
 
-dogsRouter.get("/",getDogsHandlers)
-dogsRouter.get("/:id",getDetailHandler)
-dogsRouter.post("/",postDogsHandler)
-
-
+dogsRouter.get("/", getDogsHandlers)
+dogsRouter.get("/:id", getDetailHandler)
+dogsRouter.post("/", postDogsHandler)
 
 
-
-module.exports= dogsRouter;
+module.exports = dogsRouter;

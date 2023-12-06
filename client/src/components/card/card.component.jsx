@@ -16,12 +16,12 @@ function Card({ dog }) {
     if (!Temperaments || Temperaments.length === 0) {
       return 'No temperament information available';
     } else if (Array.isArray(Temperaments) && typeof Temperaments[0] === 'string') {
-      return Temperaments.join(', '); // Handles the case where Temperaments is an array of strings
+      return Temperaments.join(', '); 
     } else if (Array.isArray(Temperaments) && typeof Temperaments[0] === 'object' && 'name' in Temperaments[0]) {
       const temperamentNames = Temperaments.map(temp => temp.name);
-      return temperamentNames.join(', '); // Handles the case where Temperaments is an array of objects
+      return temperamentNames.join(', '); 
     } else if (typeof Temperaments === 'string') {
-      return Temperaments; // Handles the case where Temperaments is a single string
+      return Temperaments;
     } else {
       return 'Temperament data not available';
     }

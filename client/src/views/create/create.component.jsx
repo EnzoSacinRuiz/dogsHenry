@@ -86,14 +86,13 @@ const Create = () => {
       parseInt(minHeight) >= parseInt(maxHeight) ||
       parseInt(minWeight) >= parseInt(maxWeight)
     ) {
-      setAlertError(true); 
+      setAlertError(true);
       return;
     }
 
     if (formValid) {
-      setAlertError(false); // Reset the alert error state if validation passes
+      setAlertError(false);
       try {
-        // Your code for handling form submission
         const temperamentsArray = temperament.split(',').map(temp => temp.trim());
         const response = await fetch('http://localhost:3001/dogs', {
           method: 'POST',
@@ -104,7 +103,7 @@ const Create = () => {
             name,
             height: `${parseInt(minHeight)} - ${parseInt(maxHeight)}`,
             weight: `${parseInt(minWeight)} - ${parseInt(maxWeight)}`,
-            life_span: parseInt(lifeSpan), //ACA
+            life_span: parseInt(lifeSpan),
             url: url,
             temperamentName: temperamentsArray,
           }),

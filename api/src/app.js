@@ -4,9 +4,8 @@ const mainRouter = require('./routes/mainRouter.js');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-//const routes = require('./routes/index.js');
 
-require('dotenv').config(); // Load environment variables
+require('dotenv').config();
 
 require('./db.js');
 
@@ -14,7 +13,6 @@ const server = express();
 server.use(morgan('dev'));
 server.use(express.json());
 
-//server.use(cors());
 
 server.use(express.json());
 

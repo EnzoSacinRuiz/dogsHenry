@@ -6,123 +6,65 @@ const infoCleaner2 = require('../utils/cleaner2');
 
 
 const getAllTemperaments = async () => {
-    const apiUrl = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`);
+  // const apiUrl = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`);
 
-    apiUrl.data.forEach(async (element) => {
-      if (element.temperament) {
-        const tempes = element.temperament.split(', ');
+  // apiUrl.data.forEach(async (element) => {
+  //   if (element.temperament) {
+  //     const tempes = element.temperament.split(', ');
 
-        tempes.forEach(async (temperamentName) => {
-          try {
-            // Find or create each temperament
-            const [temperament, created] = await Temperament.findOrCreate({
-              where: { name: temperamentName },
-            });
+  //     tempes.forEach(async (temperamentName) => {
+  //       try {
+  //         // Find or create each temperament
+  //         const [temperament, created] = await Temperament.findOrCreate({
+  //           where: { name: temperamentName },
+  //         });
 
-            // Handle success or error for each temperament creation
-            if (created) {
-              console.log(`Temperament "${temperament.name}" created.`);
-            } else {
-              console.log(`Temperament "${temperament.name}" already exists.`);
-            }
-          } catch (error) {
-            console.error(`Error finding or creating temperament: ${error}`);
-          }
-        });
-      }
-    });
+  //         // Handle success or error for each temperament creation
+  //         if (created) {
+  //           console.log(`Temperament "${temperament.name}" created.`);
+  //         } else {
+  //           console.log(`Temperament "${temperament.name}" already exists.`);
+  //         }
+  //       } catch (error) {
+  //         console.error(`Error finding or creating temperament: ${error}`);
+  //       }
+  //     });
+  //   }
+  // });
 
-    const allTemperaments = await Temperament.findAll(); // Retrieve all temperaments from the database
-    return allTemperaments;
+  
+
+  const allTemperaments = await Temperament.findAll(); 
+  return allTemperaments;
 }
 
 
-// const getDogbyTemperament = async (temperamentid) => {
-//   try {
-//     const temperament = await Temperament.findByPk(temperamentid, {
-//       include: [
-//         {
-//           model: Dog,
-//           attributes: ['id', 'name', 'height', 'weight', 'life_span', 'url'],
-//         },
-//       ],
-//     });
-//     console.log(temperament.length);
-
-//     const response = (await axios.get('http://localhost:3001/dogs')).data;
-//     const filteredDogs = response.filter((dog) => {
-//         return dog.Temperaments && dog.Temperaments.includes(temperament.name);
-//       });
-      
-  
-  
-//     return {temperament,filteredDogs};
-
-
-
-
-
-    // if (temperament.length===0) {
-    //     const tempName = await Temperament.findByPk(temperamentid,{
-    //         attributes: ['name'] // Specify the 'name' column to include
-    //       });
-        
-
-    // // Fetch all dogs from the API endpoint
-    // const apiUrl = `http://localhost:3001/dogs`;
-    // const response = await axios.get(apiUrl);
-    // const allDogs = response.data;
-    // console.log(allDogs);
-
-    // // Filter the dogs based on the matching temperament name
-    // const dogsWithMatchingTemperament = [];
-    // allDogs.forEach((dog) => {
-    //   if (dog.Temperaments.includes(tempName)) {
-    //     dogsWithMatchingTemperament.push(dog);
-    //   }
-    // });
-
-    // return dogsWithMatchingTemperament;
-      
-    // }
-
-    // else {
-    //     throw new Error('Temperament not found');
-
-    // }
-
-    //const dogs = await temperament.getDogs(); // Access the associated dogs
-
-    
-//   } catch (error) {
-//     throw new Error(error.message);
-//   }
-// };
 const fetchDogDetails = async (id) => {
-    try {
-      const response = await axios.get(`http://localhost:3001/dogs/${id}`);
-      const dogDetails = response.data;
-      return dogDetails;
-    } catch (error) {
-      console.error('Error fetching dog details:', error);
-      return null;
-    }
-  };
+  try {
+    const response = await axios.get(`http://localhost:3001/dogs/${id}`);
+    const dogDetails = response.data;
+    return dogDetails;
+  } catch (error) {
+    console.error('Error fetching dog details:', error);
+    return null;
+  }
+};
+
 
 const getDogbyTemperament = async (temperamentName) => {
-    const formattedTemperamentName =
+  const formattedTemperamentName =
     temperamentName.charAt(0).toUpperCase() + temperamentName.slice(1).toLowerCase();
-    try {
-        const temperament = await Temperament.findOne({
-            where: { name: formattedTemperamentName },
-            include: [
-              {
-                model: Dog,
-                attributes: ['id', 'name', 'height', 'weight', 'life_span', 'url','created'],
-              },
-            ],
-          });
-      const cleanTemperament = [];
+  try {
+    const temperament = await Temperament.findOne({
+      where: { name: formattedTemperamentName },
+      include: [
+        {
+          model: Dog,
+          attributes: ['id', 'name', 'height', 'weight', 'life_span', 'url', 'created'],
+        },
+      ],
+    });
+    const cleanTemperament = [];
 
     for (let i = 0; i < temperament.Dogs.length; i++) {
       const dog = temperament.Dogs[i];
@@ -130,35 +72,35 @@ const getDogbyTemperament = async (temperamentName) => {
       if (dogDetails) {
         const extractedTemperaments = dogDetails.Temperaments.map((temp) => temp.name);
         const updatedDog = {
-          ...dog.toJSON(), // Convert Sequelize instance to plain object
+          ...dog.toJSON(),
           Temperaments: `${extractedTemperaments.join(', ')}`,
         };
         cleanTemperament.push(updatedDog);
       }
     }
-     
+
 
     const cleanTemperament2 = infoCleaner2(cleanTemperament)
 
 
-  
-      const response = (await axios.get('http://localhost:3001/dogs')).data;
-      const filteredDogs = response.filter((dog) => {
-        return dog.Temperaments && dog.Temperaments.includes(temperament.name);
-      });
-  
-    
-    return [...cleanTemperament2,...filteredDogs]
-  
-    } catch (error) {
-      throw new Error(error.message);
-    }
-  };
-  
+
+    const response = (await axios.get('http://localhost:3001/dogs')).data;
+    const filteredDogs = response.filter((dog) => {
+      return dog.Temperaments && dog.Temperaments.includes(temperament.name);
+    });
+
+
+    return [...cleanTemperament2, ...filteredDogs]
+
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
 
 
 
-module.exports={
-    getAllTemperaments,
-    getDogbyTemperament
+
+module.exports = {
+  getAllTemperaments,
+  getDogbyTemperament
 }

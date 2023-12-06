@@ -145,14 +145,11 @@ function rootReducer(state = initialState, action) {
       case GET_DOGS_BY_TEMPERAMENT: {
         let filteredUsers = action.payload;
       
-        // Check if any filter is applied (createdTrue or createdFalse)
         if (state.filters.createdTrue || state.filters.createdFalse) {
-          // Apply the temperament filter on the filtered dataset (userTrue or userFalse)
           filteredUsers = state.filters.createdTrue
             ? state.userTrue.filter(user => filteredUsers.some(tempUser => tempUser.id === user.id))
             : state.userFalse.filter(user => filteredUsers.some(tempUser => tempUser.id === user.id));
         } else {
-          // No filter is applied, return the temperament-filtered dataset as it is
           return {
             ...state,
             allUsers: action.payload,

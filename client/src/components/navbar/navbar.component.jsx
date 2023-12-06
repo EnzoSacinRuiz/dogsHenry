@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { useDispatch,useSelector } from "react-redux";
-import { getByName, getDogs  } from "../../redux/actions";
-import './navbar.styles.css'; // Import your CSS file
+import { useDispatch, useSelector } from "react-redux";
+import { getByName, getDogs } from "../../redux/actions";
+import './navbar.styles.css';
 
-function Navbar({ filteredUsers}) {
+function Navbar({ filteredUsers }) {
   const dispatch = useDispatch();
   const [searchString, setSearchString] = useState("");
   const breedNotFound = useSelector((state) => state.breedNotFound);
-  
+
 
   function handleChange(e) {
     setSearchString(e.target.value);
@@ -20,8 +20,8 @@ function Navbar({ filteredUsers}) {
   }
 
 
-  
-  
+
+
 
   return (
     <div className="search-box">
