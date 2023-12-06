@@ -86,7 +86,7 @@ const Create = () => {
       parseInt(minHeight) >= parseInt(maxHeight) ||
       parseInt(minWeight) >= parseInt(maxWeight)
     ) {
-      setAlertError(true); // Activate the alert error state
+      setAlertError(true); 
       return;
     }
 

@@ -19,6 +19,8 @@ function Home() {
   const dogsPerPage = 8;
 
   const [selectedTemperament, setSelectedTemperament] = useState('');
+    
+
 
   const temperaments = useSelector((state) => state.temperaments);
   const dogsByTemperament = useSelector((state) => state.dogsByTemperament);
@@ -57,6 +59,7 @@ function Home() {
   const indexOfLastDog = currentPage * dogsPerPage;
   const indexOfFirstDog = indexOfLastDog - dogsPerPage;
   const currentDogs = allUsers.slice(indexOfFirstDog, indexOfLastDog);
+  const totalNumberOfPages = Math.ceil(allUsers.length / dogsPerPage);
 
   function handleGetDogs() {
     dispatch(getDogs());
@@ -162,23 +165,27 @@ function Home() {
         <Cards currentDogs={currentDogs} />
       </div>
 
-      <div className="pagination">
-        <div class="page-info">
-          <span>Current Page: {currentPage}</span>
-        </div>
+      <div className="pagination-buttons">
+        <button
+          className="pagination-button"
+          disabled={currentPage === 1}
+          onClick={() => paginate(currentPage - 1)}
+        >
+          Previous
+        </button>
 
-        <div className="pagination-buttons">
+        <span>Page {currentPage} of {totalNumberOfPages}</span>
 
-          {[...Array(Math.ceil(allUsers.length / dogsPerPage))].map((_, index) => (
-            <button key={index} className="pagination-button" onClick={() => paginate(index + 1)}>
-              {index + 1}
-            </button>
-          ))}
+        
 
-        </div>
-
+        <button
+          className="pagination-button"
+          disabled={currentPage === Math.ceil(allUsers.length / dogsPerPage)}
+          onClick={() => paginate(currentPage + 1)}
+        >
+          Next
+        </button>
       </div>
-
 
     </div>
   );
