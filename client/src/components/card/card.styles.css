@@ -22,6 +22,7 @@
   max-height: 150px; /* Limit maximum height if needed */
   border-radius: 5px; /* Optional: Add border-radius for image */
   margin-bottom: 10px; /* Adjust space between image and text */
+  
 }
 
 .dog-card-text {

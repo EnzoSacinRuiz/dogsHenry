@@ -17,6 +17,7 @@ export const GET_DOGS_BY_TEMPERAMENT = 'GET_DOGS_BY_TEMPERAMENT';
 export const GET_TEMPERAMENTS = 'GET_TEMPERAMENTS';
 export const BREED_NOT_FOUND='BREED_NOT_FOUND';
 export const FETCH_ERROR='FETCH_ERROR';
+export const CLEAR_NOT_FOUND='CLEAR_NOT_FOUND'
 
 
 
@@ -81,6 +82,16 @@ export function getByName(name) {
         return dispatch({
           type: "CLEAR_USER_DETAIL",
           payload: null 
+        }) 
+      };
+      
+    };
+
+    export function clearnotFound() {
+      return async function (dispatch) {
+        return dispatch({
+          type: "CLEAR_NOT_FOUND",
+          payload: false 
         }) 
       };
       

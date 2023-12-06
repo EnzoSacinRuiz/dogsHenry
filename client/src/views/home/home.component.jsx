@@ -1,25 +1,27 @@
   import Navbar from "../../components/navbar/navbar.component";
   import Cards from "../../components/cards/cards.component";
+  import './home.styles.css'
 
   import { useEffect, useState } from "react";
   import { useDispatch, useSelector } from "react-redux";
   import { getDogs,sortDogsAscending,sortDogsDescending,filterCreatedTrue,
     filterCreatedFalse,sortDogsAscendingByWeight,sortDogsDescendingByWeight, getDogsByTemperament,getTemperaments,filterByCreated, 
-  filterByTemperament} from "../../redux/actions";
-  // import { getAllUsers } from "../landing/landing.component";
+  filterByTemperament,clearnotFound} from "../../redux/actions";
   
-  import './home.styles.css'
+  
 
   function Home() {
 
     const dispatch = useDispatch();
-    const [currentPage, setCurrentPage] = useState(1); // Current page state
-    const dogsPerPage = 8; // Number of dogs per page
+    const [currentPage, setCurrentPage] = useState(1); 
+    const dogsPerPage = 8;
 
     const [selectedTemperament, setSelectedTemperament] = useState('');
+
     const temperaments = useSelector((state) => state.temperaments);
     const dogsByTemperament = useSelector((state) => state.dogsByTemperament);
     const breedNotFound = useSelector((state) => state.breedNotFound);
+    const [refreshNavbar, setRefreshNavbar] = useState(false);
 
 
     
@@ -44,7 +46,6 @@
           dispatch(getDogsByTemperament(selectedTemperament));
         }
       }, [selectedTemperament, dispatch]);
-      // console.log(dogsByTemperament);
       
   
 
@@ -67,7 +68,7 @@
       dispatch(filterByTemperament(temperament));
     };
     const handleClearSelection = () => {
-      setSelectedTemperament(""); // Clear the selected temperament
+      setSelectedTemperament(""); 
     };
 
 
@@ -99,9 +100,18 @@
       dispatch(sortDogsDescendingByWeight());
     };
 
+
+    const cleanNotFound = () => {
+      dispatch(clearnotFound())
+    }
+    
+    
+
     const handleClearSelectionAndGetDogs = () => {
       handleClearSelection();
       handleGetDogs();
+      cleanNotFound();
+      setRefreshNavbar(prevState => !prevState);
     };
   
 
@@ -111,15 +121,10 @@
       <div className="home">
         <div className="center-content">
           <h1 className="home-title">HomePage</h1>
-          <Navbar filteredUsers={filteredUsers} />
+          <Navbar filteredUsers={filteredUsers} key={refreshNavbar ? "refresh" : "no-refresh"}/>
         </div>
 
         <div class="button-columns">
-
-        {/* <div class="button-column">
-          <button onClick={() => handleFilterByCreated(true)}>Filter Created True22</button>
-          <button onClick={() => handleFilterByCreated(false)}>Filter Created False22</button>
-        </div> */}
 
         <div class="button-column">
           <button onClick={handleSortAscending}>Sort Ascending</button>
@@ -150,8 +155,6 @@
         ))}
       </select>
 
-      {/* <button onClick={handleClearSelectionAndGetDogs}>Clear Selection</button> */}
-
 
 
   
@@ -160,11 +163,20 @@
         </div>
 
         <div className="pagination">
+          <div class="page-info">
+          <span>Current Page: {currentPage}</span>
+          </div>
+
+          <div className="pagination-buttons">
+        
         {[...Array(Math.ceil(allUsers.length / dogsPerPage))].map((_, index) => (
           <button key={index} className="pagination-button" onClick={() => paginate(index + 1)}>
             {index + 1}
           </button>
         ))}
+
+        </div>
+
       </div>
 
       

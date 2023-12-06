@@ -11,7 +11,13 @@ const getDogsHandlers = async (req,res)=>{
 
     try {
         if(name){
-            const driverByName = await getDogByName(name)
+            const capitalizedName = name
+            .toLowerCase() 
+            .split(' ')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1)) 
+            .join(' '); 
+
+            const driverByName = await getDogByName(capitalizedName)
             res.status(200).json(driverByName)
         } else {
             const response = await getAllDrivers()
@@ -46,10 +52,15 @@ const postDogsHandler = async (req, res) => {
         if (!name || !height || !weight || !life_span || !url || !temperamentName) {
             return res.status(400).json({ error: "All fields are required." });
         }
-        console.log("handlerPassed");
 
-        await createDriverDB(name, height, weight, life_span, url, temperamentName)
-                res.status(201).json({ message: "Dog created successfully." });
+        const formattedName = name
+            .split(' ')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+            .join(' ');
+        
+
+        await createDriverDB(formattedName, height, weight, life_span, url, temperamentName)
+        res.status(201).json({ message: "Dog created successfully." });
 
     } catch (error) {
         res.status(500).json({ error: error.message });

@@ -1,25 +1,39 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin: auto;
+}
 
-  .form-container {
-    display: flex;
-    flex-direction: column;
-    max-width: 300px;
-    margin: auto;
-  }
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px; /* Adjust spacing between input groups */
+}
 
-  .form-container input,
+.input-group input {
+  margin-bottom: 5px; /* Adjust spacing between input and error */
+  padding: 8px;
+}
   .form-container button {
     margin-bottom: 10px;
     padding: 8px;
   }
 
   .error {
-    color: red;
+    color: #0ccac4;
     font-size: 12px;
+    
   }
 
   .error-summary {
     color: red;
     margin-top: 10px;
+  }
+
+  .red-label {
+    color: red;
+    /* Additional styles if needed */
   }
 
 

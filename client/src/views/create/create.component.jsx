@@ -21,6 +21,7 @@ const Create = () => {
     lifeSpan: '',
     temperament: '',
   });
+
   const [formValid, setFormValid] = useState(false);
   const [alertError, setAlertError] = useState(false); 
 
@@ -99,14 +100,12 @@ const Create = () => {
             weight: `${parseInt(minWeight)} - ${parseInt(maxWeight)}`,
             life_span: parseInt(lifeSpan), //ACA
             url: url,
-            // temperamentName: temperament,
             temperamentName: temperamentsArray,
           }),
         });
 
         if (response.ok) {
           alert('Dog breed created successfully!');
-          // Reset all input fields
           setName('');
           setMinHeight('');
           setMaxHeight('');
@@ -148,64 +147,85 @@ const Create = () => {
     <div> 
       <h1>Crea tu perro</h1>
       <Link to="/home" className="go-back-link">
-        <button className="go-back-button">Go Back</button>
+        <button className="go-back-button">Go Back to Home Page</button>
       </Link>
+
+      
+
 <form className="form-container" onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Name"
-      />
-      {errors.name && <span className="error">{errors.name}</span>}
 
-      <input
-        type="text"
-        value={minHeight}
-        onChange={(e) => setMinHeight(e.target.value)}
-        placeholder="Min Height"
-      />
-      {errors.minHeight && <span className="error">{errors.minHeight}</span>}
+      <div className="input-group">
+      <label htmlFor="name">Name:</label>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Name"/>
+        {errors.name && <span className="error">{errors.name}</span>}
+      </div>
 
-      <input
-        type="text"
-        value={maxHeight}
-        onChange={(e) => setMaxHeight(e.target.value)}
-        placeholder="Max Height"
-      />
-      {errors.maxHeight && <span className="error">{errors.maxHeight}</span>}
+      <div className="input-group">
+      <label htmlFor="minHeight" className={alertError ? 'red-label' : ''}>Min Heigth:</label>
+        <input
+          type="text"
+          value={minHeight}
+          onChange={(e) => setMinHeight(e.target.value)}
+          placeholder="Min Height" />
+        {errors.minHeight && <span className="error">{errors.minHeight}</span>}
+      </div>
 
-      <input
-        type="text"
-        value={minWeight}
-        onChange={(e) => setMinWeight(e.target.value)}
-        placeholder="Min Weight"
-      />
+      <div className="input-group">
+      <label htmlFor="maxHeight" className={alertError ? 'red-label' : ''}>Max Heigth:</label>
+        <input
+          type="text"
+          value={maxHeight}
+          onChange={(e) => setMaxHeight(e.target.value)}
+          placeholder="Max Height"/>
+        {errors.maxHeight && <span className="error">{errors.maxHeight}</span>}
+      </div>
+      
+      <div className="input-group">
+      <label htmlFor="minWeight" className={alertError ? 'red-label' : ''}>Min Weigt:</label>
+        <input
+          type="text"
+          value={minWeight}
+          onChange={(e) => setMinWeight(e.target.value)}
+          placeholder="Min Weight"/> 
       {errors.minWeight && <span className="error">{errors.minWeight}</span>}
+      </div>
 
-      <input
-        type="text"
-        value={maxWeight}
-        onChange={(e) => setMaxWeight(e.target.value)}
-        placeholder="Max Weight"
-      />
-      {errors.maxWeight && <span className="error">{errors.maxWeight}</span>}
+      <div className="input-group">
+      <label htmlFor="maxWeight" className={alertError ? 'red-label' : ''}>Max Weigth:</label>
+        <input
+          type="text"
+          value={maxWeight}
+          onChange={(e) => setMaxWeight(e.target.value)}
+          placeholder="Max Weight"/>
+        {errors.maxWeight && <span className="error">{errors.maxWeight}</span>}
+      </div>
 
-      <input
-        type="text"
-        value={lifeSpan}
-        onChange={(e) => setLifeSpan(e.target.value)}
-        placeholder="Life Span"
-      />
-      {errors.lifeSpan && <span className="error">{errors.lifeSpan}</span>}
+      <div className="input-group">
+      <label htmlFor="lifeSpan">Life Span:</label>
+        <input
+          type="text"
+          value={lifeSpan}
+          onChange={(e) => setLifeSpan(e.target.value)}
+          placeholder="Life Span"/>
+        {errors.lifeSpan && <span className="error">{errors.lifeSpan}</span>}
+      </div>
 
+      <div className="input-group">
+      <label htmlFor="url">Image URL:</label>
       <input
         type="text"
         value={url}
         onChange={(e) => setURL(e.target.value)}
         placeholder="URL"
       />
+      </div>
 
+      <div className="input-group">
+      <label htmlFor="Temperaments">Temperaments:</label>
       <input
         type="text"
         value={temperament}
@@ -213,6 +233,7 @@ const Create = () => {
         placeholder="Temperament"
       />
       {errors.temperament && <span className="error">{errors.temperament}</span>}
+      </div>
 
       {alertError && (
         <div className="error-summary">
@@ -220,13 +241,13 @@ const Create = () => {
         </div>
       )}
 
+      <p>You will be able to click the button to create your dog when you write the mandatory info</p>
+
       <button type="submit" disabled={!formValid}>
         Create Dog Breed
       </button>
-
-   
-
     </form>
+
     </div>
     
   );

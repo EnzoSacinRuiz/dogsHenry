@@ -10,10 +10,10 @@ const path = require('path');
 const { log } = require("console");
 require('dotenv').config({ path: path.resolve("C:\Users\Enzo Sacin Ruiz\OneDrive\Documentos\henry\fullStack\PI-Dogs-main\api\src\controllers", 'C:\Users\Enzo Sacin Ruiz\OneDrive\Documentos\henry\fullStack\PI-Dogs-main\api/.env') });
 
-const createDriverDB = async (name, height, weight, life_span, url, temperamentName) => {
+const createDriverDB = async (formattedName, height, weight, life_span, url, temperamentName) => {
     try {
       const createdDog = await Dog.create({ 
-        name: name,
+        name: formattedName,
         height: height,
         weight: weight,
         life_span: life_span,
@@ -107,7 +107,7 @@ const getDogByName = async (name) => {
         const infoApi = (await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)).data;
         const dogApi = infoCleaner(infoApi);
 
-        const driversFiltered = dogApi.filter(dog => dog.name.toLowerCase() === name.toLowerCase());
+        const driversFiltered = dogApi.filter(dog => dog.name === name);
 
         const driverBDD = await Dog.findAll({ where: { name: name } });
 
