@@ -1,148 +1,148 @@
-  import Navbar from "../../components/navbar/navbar.component";
-  import Cards from "../../components/cards/cards.component";
-  import './home.styles.css'
+import Navbar from "../../components/navbar/navbar.component";
+import Cards from "../../components/cards/cards.component";
+import './home.styles.css'
 
-  import { useEffect, useState } from "react";
-  import { useDispatch, useSelector } from "react-redux";
-  import { getDogs,sortDogsAscending,sortDogsDescending,filterCreatedTrue,
-    filterCreatedFalse,sortDogsAscendingByWeight,sortDogsDescendingByWeight, getDogsByTemperament,getTemperaments,filterByCreated, 
-  filterByTemperament,clearnotFound} from "../../redux/actions";
-  
-  
-
-  function Home() {
-
-    const dispatch = useDispatch();
-    const [currentPage, setCurrentPage] = useState(1); 
-    const dogsPerPage = 8;
-
-    const [selectedTemperament, setSelectedTemperament] = useState('');
-
-    const temperaments = useSelector((state) => state.temperaments);
-    const dogsByTemperament = useSelector((state) => state.dogsByTemperament);
-    const breedNotFound = useSelector((state) => state.breedNotFound);
-    const [refreshNavbar, setRefreshNavbar] = useState(false);
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getDogs, sortDogsAscending, sortDogsDescending, filterCreatedTrue,
+  filterCreatedFalse, sortDogsAscendingByWeight, sortDogsDescendingByWeight, getDogsByTemperament, getTemperaments, filterByCreated,
+  clearnotFound
+} from "../../redux/actions";
 
 
-    
-    
-    useEffect(() => {
-      dispatch(getTemperaments());
-    }, [dispatch]);
+
+function Home() {
+
+  const dispatch = useDispatch();
+  const [currentPage, setCurrentPage] = useState(1);
+  const dogsPerPage = 8;
+
+  const [selectedTemperament, setSelectedTemperament] = useState('');
+
+  const temperaments = useSelector((state) => state.temperaments);
+  const dogsByTemperament = useSelector((state) => state.dogsByTemperament);
+  const breedNotFound = useSelector((state) => state.breedNotFound);
+  const [refreshNavbar, setRefreshNavbar] = useState(false);
 
 
 
 
-    useEffect(() => {
-        dispatch(getDogs());
-      }, [dispatch]);
+  useEffect(() => {
+    dispatch(getTemperaments());
+  }, [dispatch]);
 
-      const handleSelectChange = (event) => {
-        setSelectedTemperament(event.target.value);
-      };
-    
-      useEffect(() => {
-        if (selectedTemperament) {
-          dispatch(getDogsByTemperament(selectedTemperament));
-        }
-      }, [selectedTemperament, dispatch]);
-      
-  
 
-     const allUsers = useSelector((state) => state.allUsers);
-     console.log(allUsers);
-     const filteredUsers = useSelector((state) => state.allUsers); 
-     const indexOfLastDog = currentPage * dogsPerPage;
-     const indexOfFirstDog = indexOfLastDog - dogsPerPage;
-     const currentDogs = allUsers.slice(indexOfFirstDog, indexOfLastDog);
 
-     function handleGetDogs() {
-      dispatch(getDogs());
+
+  useEffect(() => {
+    dispatch(getDogs());
+  }, [dispatch]);
+
+  const handleSelectChange = (event) => {
+    setSelectedTemperament(event.target.value);
+  };
+
+  useEffect(() => {
+    if (selectedTemperament) {
+      dispatch(getDogsByTemperament(selectedTemperament));
     }
-
-     const handleFilterByCreated = (status) => {
-      dispatch(filterByCreated(status));
-    };
-  
-    const handleFilterByTemperament = (temperament) => {
-      dispatch(filterByTemperament(temperament));
-    };
-    const handleClearSelection = () => {
-      setSelectedTemperament(""); 
-    };
+  }, [selectedTemperament, dispatch]);
 
 
-    const handleSortAscending = () => {
-      dispatch(sortDogsAscending());
-    };
-  
-    const handleSortDescending = () => {
-      dispatch(sortDogsDescending());
-    };
 
-    const handleFilterCreatedTrue = () => {
-      dispatch(filterCreatedTrue());
-    };
-  
-    const handleFilterCreatedFalse = () => {
-      dispatch(filterCreatedFalse());
-    };
+  const allUsers = useSelector((state) => state.allUsers);
+  console.log(allUsers);
+  const filteredUsers = useSelector((state) => state.allUsers);
+  const indexOfLastDog = currentPage * dogsPerPage;
+  const indexOfFirstDog = indexOfLastDog - dogsPerPage;
+  const currentDogs = allUsers.slice(indexOfFirstDog, indexOfLastDog);
 
-    const paginate = pageNumber => {
-      setCurrentPage(pageNumber);
-    };
+  function handleGetDogs() {
+    dispatch(getDogs());
+  }
 
-    const handleSortAscendingByWeight = () => {
-      dispatch(sortDogsAscendingByWeight());
-    };
-  
-    const handleSortDescendingByWeight = () => {
-      dispatch(sortDogsDescendingByWeight());
-    };
+  const handleFilterByCreated = (status) => {
+    dispatch(filterByCreated(status));
+  };
 
 
-    const cleanNotFound = () => {
-      dispatch(clearnotFound())
-    }
-    
-    
+  const handleClearSelection = () => {
+    setSelectedTemperament("");
+  };
 
-    const handleClearSelectionAndGetDogs = () => {
-      handleClearSelection();
-      handleGetDogs();
-      cleanNotFound();
-      setRefreshNavbar(prevState => !prevState);
-    };
-  
 
-    
+  const handleSortAscending = () => {
+    dispatch(sortDogsAscending());
+  };
 
-    return (
-      <div className="home">
-        <div className="center-content">
-          <h1 className="home-title">HomePage</h1>
-          <Navbar filteredUsers={filteredUsers} key={refreshNavbar ? "refresh" : "no-refresh"}/>
-        </div>
+  const handleSortDescending = () => {
+    dispatch(sortDogsDescending());
+  };
 
-        <div class="button-columns">
+  const handleFilterCreatedTrue = () => {
+    dispatch(filterCreatedTrue());
+  };
+
+  const handleFilterCreatedFalse = () => {
+    dispatch(filterCreatedFalse());
+  };
+
+  const paginate = pageNumber => {
+    setCurrentPage(pageNumber);
+  };
+
+  const handleSortAscendingByWeight = () => {
+    dispatch(sortDogsAscendingByWeight());
+  };
+
+  const handleSortDescendingByWeight = () => {
+    dispatch(sortDogsDescendingByWeight());
+  };
+
+
+  const cleanNotFound = () => {
+    dispatch(clearnotFound())
+  }
+
+
+
+  const handleClearSelectionAndGetDogs = () => {
+    handleClearSelection();
+    handleGetDogs();
+    cleanNotFound();
+    setRefreshNavbar(prevState => !prevState);
+  };
+
+
+
+
+  return (
+    <div className="home">
+      <div className="center-content">
+        <h1 className="home-title">HomePage</h1>
+        <Navbar filteredUsers={filteredUsers} key={refreshNavbar ? "refresh" : "no-refresh"} />
+      </div>
+
+      <div class="button-columns">
 
         <div class="button-column">
           <button onClick={handleSortAscending}>Sort Ascending</button>
           <button onClick={handleSortDescending}>Sort Descending</button>
         </div>
 
-      <div class="button-column">
-        <button onClick={handleFilterCreatedTrue}>Filter Created True</button>
-        <button onClick={handleFilterCreatedFalse}>Filter Created False</button>
-      </div>
+        <div class="button-column">
+          <button onClick={handleFilterCreatedTrue}>Filter Created True</button>
+          <button onClick={handleFilterCreatedFalse}>Filter Created False</button>
+        </div>
 
-      <div class="button-column">
-        <button onClick={handleSortAscendingByWeight}>Sort by Weight Ascending</button>
-        <button onClick={handleSortDescendingByWeight}>Sort by Weight Descending</button>
-      </div>
+        <div class="button-column">
+          <button onClick={handleSortAscendingByWeight}>Sort by Weight Ascending</button>
+          <button onClick={handleSortDescendingByWeight}>Sort by Weight Descending</button>
+        </div>
 
-      
-      <button onClick={handleClearSelectionAndGetDogs}>Refresh</button>
+
+        <button onClick={handleClearSelectionAndGetDogs}>Refresh</button>
 
       </div>
 
@@ -157,32 +157,32 @@
 
 
 
-  
-        <div>
-          <Cards currentDogs={currentDogs} />
-        </div>
 
-        <div className="pagination">
-          <div class="page-info">
+      <div>
+        <Cards currentDogs={currentDogs} />
+      </div>
+
+      <div className="pagination">
+        <div class="page-info">
           <span>Current Page: {currentPage}</span>
-          </div>
+        </div>
 
-          <div className="pagination-buttons">
-        
-        {[...Array(Math.ceil(allUsers.length / dogsPerPage))].map((_, index) => (
-          <button key={index} className="pagination-button" onClick={() => paginate(index + 1)}>
-            {index + 1}
-          </button>
-        ))}
+        <div className="pagination-buttons">
+
+          {[...Array(Math.ceil(allUsers.length / dogsPerPage))].map((_, index) => (
+            <button key={index} className="pagination-button" onClick={() => paginate(index + 1)}>
+              {index + 1}
+            </button>
+          ))}
 
         </div>
 
       </div>
 
-      
-      </div>
-    );
-      
-    }
-    
-    export default Home;
+
+    </div>
+  );
+
+}
+
+export default Home;

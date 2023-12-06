@@ -133,17 +133,7 @@ export function getByName(name) {
       };
     };
 
-    export const getDogsByTemperament = (temperamentId) => async (dispatch) => {
-      try {
-        const response = await axios.get(`http://localhost:3001/temperaments?temperamentid=${temperamentId}`);
-        dispatch({
-          type: GET_DOGS_BY_TEMPERAMENT,
-          payload: response.data
-        });
-      } catch (error) {
-        console.error('Error fetching dogs by temperament:', error);
-      }
-    };
+    
 
 
   
@@ -168,9 +158,16 @@ export function getByName(name) {
       };
     };
 
-    export const filterByTemperament = (temperament) => {
-  return {
-    type: GET_DOGS_BY_TEMPERAMENT,
-    payload: temperament,
-  };
+
+
+export const getDogsByTemperament = (temperamentId) => async (dispatch) => {
+  try {
+    const response = await axios.get(`http://localhost:3001/temperaments?temperamentid=${temperamentId}`);
+    dispatch({
+      type: GET_DOGS_BY_TEMPERAMENT,
+      payload: response.data
+    });
+  } catch (error) {
+    console.error('Error fetching dogs by temperament:', error);
+  }
 };
