@@ -34,7 +34,7 @@
   border: 1px solid #ccc;
   border-radius: 5px; /* Add border-radius to input */
   font-size: 16px; /* Match font size with Home component */
-  font-family: "Bigelow Rules"; /* Match font family with Home component */
+  font-family: Verdana, Geneva, Tahoma, sans-serif; /* Match font family with Home component */
   color: #0ccac4; /* Match font color with Home component */
 }
 

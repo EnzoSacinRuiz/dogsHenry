@@ -7,7 +7,14 @@ import {
 } from "../actions";
 
 let initialState = {
-  allUsers: [], usersCopy: [], temperaments: [], detail: [], byName: [], dogsByTemperament: [], temperaments: [], breedNotFound: false,
+  allUsers: [],
+  usersCopy: [],
+  temperaments: [],
+  detail: [],
+  byName: [],
+  dogsByTemperament: [],
+  temperaments: [],
+  breedNotFound: false,
   filters: {
     createdTrue: false,
     createdFalse: false,
@@ -25,17 +32,18 @@ function rootReducer(state = initialState, action) {
         allUsers: action.payload,
         usersCopy: action.payload,
         originalUsers: action.payload,
-        userTrue: action.payload,
-        userFalse: action.payload,
-      }
+        userTrue: action.payload.filter(user => user.created === true),
+        userFalse: action.payload.filter(user => user.created === false),
+      };
+
     case GET_BY_NAME:
       return {
         ...state,
         allUsers: action.payload,
         breedNotFound: false,
         originalUsers: action.payload,
-        userTrue: action.payload,
-        userFalse: action.payload,
+        userTrue: action.payload.filter(user => user.created === true),
+        userFalse: action.payload.filter(user => user.created === false),
       };
 
     case BREED_NOT_FOUND:
@@ -47,6 +55,7 @@ function rootReducer(state = initialState, action) {
         userTrue: [],
         userFalse: action.payload,
       };
+
     case GET_BY_ID:
       return {
         ...state,
@@ -58,17 +67,19 @@ function rootReducer(state = initialState, action) {
         ...state,
         detail: action.payload
       };
+
     case CLEAR_NOT_FOUND:
       return {
         ...state,
         breedNotFound: action.payload,
-      }
+      };
 
     case SORT_DOGS_ASCENDING:
       return {
         ...state,
         allUsers: [...state.allUsers.slice().sort((a, b) => a.name.localeCompare(b.name))]
       };
+
     case SORT_DOGS_DESCENDING:
       return {
         ...state,
@@ -76,33 +87,29 @@ function rootReducer(state = initialState, action) {
       };
 
     case FILTER_CREATED_FALSE: {
-      const filteredUsers = state.allUsers.filter((user) => user.created === false);
       return {
         ...state,
-        allUsers: filteredUsers,
+        allUsers: state.userFalse,
         filters: {
           ...state.filters,
-          createdTrue: false, // Reset opposite filter
+          createdTrue: false,
           createdFalse: true,
-          // Reset other filters if necessary
         },
       };
-
     }
 
     case FILTER_CREATED_TRUE: {
-      const filteredUsers = state.allUsers.filter((user) => user.created === true);
       return {
         ...state,
-        allUsers: filteredUsers,
+        allUsers: state.userTrue,
         filters: {
           ...state.filters,
           createdTrue: true,
-          createdFalse: false, // Reset opposite filter
-          // Reset other filters if necessary
+          createdFalse: false,
         },
       };
     }
+
     case SORT_DOGS_ASCENDING_BY_WEIGHT:
       return {
         ...state,
@@ -123,7 +130,6 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         allUsers: [...state.allUsers.slice().sort((a, b) => {
-          // Extract and calculate average weight for comparison
           const extractWeight = str => {
             const [min, max] = str.split(' - ').map(Number);
             return (min + max) / 2;
@@ -136,14 +142,31 @@ function rootReducer(state = initialState, action) {
         })],
       };
 
-    case GET_DOGS_BY_TEMPERAMENT: {
-      const filteredUsers = action.payload;
-      return {
-        ...state,
-        allUsers: filteredUsers,
-        dogsByTemperament: action.payload, // Update dogsByTemperament if necessary
-      };
-    }
+      case GET_DOGS_BY_TEMPERAMENT: {
+        let filteredUsers = action.payload;
+      
+        // Check if any filter is applied (createdTrue or createdFalse)
+        if (state.filters.createdTrue || state.filters.createdFalse) {
+          // Apply the temperament filter on the filtered dataset (userTrue or userFalse)
+          filteredUsers = state.filters.createdTrue
+            ? state.userTrue.filter(user => filteredUsers.some(tempUser => tempUser.id === user.id))
+            : state.userFalse.filter(user => filteredUsers.some(tempUser => tempUser.id === user.id));
+        } else {
+          // No filter is applied, return the temperament-filtered dataset as it is
+          return {
+            ...state,
+            allUsers: action.payload,
+            dogsByTemperament: action.payload,
+          };
+        }
+      
+        return {
+          ...state,
+          allUsers: filteredUsers,
+          dogsByTemperament: action.payload,
+        };
+      }
+      
 
     case GET_TEMPERAMENTS:
       return {
@@ -156,4 +179,4 @@ function rootReducer(state = initialState, action) {
   }
 }
 
-export default rootReducer; 
+export default rootReducer;

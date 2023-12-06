@@ -6,7 +6,7 @@ body {
   background-size: cover;
   background-position: center;
   text-align: center; /* Center-align text */
-  font-family: "Bigelow Rules"; /* Apply a specific font */
+  font-family: Verdana, Geneva, Tahoma, sans-serif; /* Apply a specific font */
   color: #fff; /* Set text color to white */
 }
 
